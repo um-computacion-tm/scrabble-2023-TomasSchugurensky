@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from game.models import Tile, BagTile
+from game.models import Tile, BagTile, Player
 class TestTiles(unittest.TestCase):
     def test_tile(self):
         tile = Tile ('A',1)
@@ -24,6 +24,15 @@ class TestBagTile(unittest.TestCase):
         put_tiles = [Tile('Z', 1), Tile('Y', 1)]  
         bag.put(put_tiles)
         self.assertEqual(len(bag.tiles), 7)  
+
+class TestPlayer(unittest.TestCase):
+    def test_player(self):
+        player = Player()
+        self.assertEqual(
+            len(player.tiles),
+            0,
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

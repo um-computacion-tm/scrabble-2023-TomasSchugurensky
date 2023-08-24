@@ -24,3 +24,7 @@ class BagTile:
     def put(self,tiles):
         for tile in tiles:
             self.tiles.append(tile)
+
+class Player:
+    def __init__(self):
+        self.tiles = []
