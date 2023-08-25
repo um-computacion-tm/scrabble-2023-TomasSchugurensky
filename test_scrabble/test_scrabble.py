@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from game.models import Tile, BagTile, Player
+from game.models import Tile, BagTile, Player, Board
 class TestTiles(unittest.TestCase):
     def test_tile(self):
         tile = Tile ('A',1)
@@ -33,6 +33,17 @@ class TestPlayer(unittest.TestCase):
             0,
         )
 
+class TestBoard(unittest.TestCase):
+    def test_board (self):
+        board = Board 
+        self.assertEqual(
+            len(board.grid),
+            15,
+        )
+        self.assertEqual(
+            len(board.grid[0],
+                15,)
+        )
 
 if __name__ == '__main__':
     unittest.main()
