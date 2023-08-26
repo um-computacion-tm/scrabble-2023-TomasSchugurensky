@@ -35,3 +35,9 @@ class Board:
             [None for _ in range (15)]     
             for _ in range (15)
         ]
+
+class Cell:
+    def __init__(self, multiplier, multiplier_type):
+        self.multiplier = multiplier
+        self.multiplier_type = multiplier_type
+        self.letter = None
