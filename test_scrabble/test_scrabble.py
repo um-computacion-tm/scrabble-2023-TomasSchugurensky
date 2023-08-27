@@ -34,16 +34,10 @@ class TestPlayer(unittest.TestCase):
         )
 
 class TestBoard(unittest.TestCase):
-    def test_board (self):
-        board = Board 
-        self.assertEqual(
-            len(board.grid),
-            15,
-        )
-        self.assertEqual(
-            len(board.grid[0],
-                15,)
-        )
+    def test_board(self):
+        board = Board()
+        self.assertEqual(len(board.grid), 15)
+        self.assertEqual(len(board.grid[0]), 15)
 
 class TestCell(unittest.TestCase):
     def test_cell(self):
@@ -51,6 +45,18 @@ class TestCell(unittest.TestCase):
         self.assertEqual(cell.multiplier, 2)
         self.assertEqual(cell.multiplier_type, 'letter')
         self.assertIsNone(cell.letter)
+    
+    def test_add_letter(self):
+        cell = Cell(multiplier=1, multiplier_type='')
+        letter = Tile(letter='p', values=3)
+        cell.add_letter(letter)
+        self.assertEqual(cell.letter.letter, 'p')
+    
+    def test_cell_value(self):
+        cell = Cell(multiplier=1, multiplier_type='')
+        letter = Tile(letter='p', values=3)
+        cell.add_letter(letter)
+        self.assertEqual(cell.calculate_value(), 3)
 
 if __name__ == '__main__':
     unittest.main()

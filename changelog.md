@@ -2,3 +2,4 @@
 #24/08/2023: Add Player
 #25/08/2023: Add Board
 #26/08/2023: Add Cell
+#27/08/2023: Add methods to class Cell
