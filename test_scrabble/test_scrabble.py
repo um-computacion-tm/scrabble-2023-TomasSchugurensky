@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from game.models import Tile, BagTile, Player, Board, Cell
+from game.models import Tile, BagTile, Player, Board, Cell, ScrabbleGame
 class TestTiles(unittest.TestCase):
     def test_tile(self):
         tile = Tile ('A',1)
@@ -57,6 +57,15 @@ class TestCell(unittest.TestCase):
         letter = Tile(letter='p', values=3)
         cell.add_letter(letter)
         self.assertEqual(cell.calculate_value(), 3)
+    
+class TestScrabble(unittest.TestCase):
+    def test_scrabble(self):
+        scrabble = ScrabbleGame(3)
+        self.assertIsNotNone(scrabble.board)
+        self.assertEqual(
+            len(scrabble.players),
+            3,
+        )
 
 if __name__ == '__main__':
     unittest.main()

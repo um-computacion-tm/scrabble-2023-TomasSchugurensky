@@ -50,3 +50,10 @@ class Cell:
             return 0
         return self.letter.values * self.multiplier
 
+class ScrabbleGame:
+    def __init__(self, players_count):
+        self.board = Board()
+        self.players = []
+        self.bag_tile = BagTile()
+        for _ in range(players_count):
+            self.players.append(Player())
