@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch
 from game.models import Tile, BagTile, Player, Board, Cell, ScrabbleGame
+
 class TestTiles(unittest.TestCase):
     def test_tile(self):
         tile = Tile ('A',1)
@@ -58,6 +59,9 @@ class TestCell(unittest.TestCase):
         cell.add_letter(letter)
         self.assertEqual(cell.calculate_value(), 3)
     
+    def test_cell_multiplier_active(self):
+        pass
+    
 class TestScrabble(unittest.TestCase):
     def test_scrabble(self):
         scrabble = ScrabbleGame(3)
@@ -66,6 +70,23 @@ class TestScrabble(unittest.TestCase):
             len(scrabble.players),
             3,
         )
+    
+    def test_next_turn_when_game_is_starting(self):
+        scrabble_game = ScrabbleGame(players_count=3)
+        scrabble_game.next_turn()
+        self.assertEqual(scrabble_game.current_player, scrabble_game.players[1])
+
+    def test_next_turn_when_player_is_not_the_first(self):
+        scrabble_game = ScrabbleGame(players_count=3)
+        scrabble_game.current_player = scrabble_game.players[0]
+        scrabble_game.next_turn()
+        assert scrabble_game.current_player == scrabble_game.players[1]
+
+    def test_next_turn_when_player_is_last(self):
+        scrabble_game = ScrabbleGame(players_count=3)
+        scrabble_game.turn = 2  
+        scrabble_game.next_turn()
+        assert scrabble_game.current_player == scrabble_game.players[0]
 
 if __name__ == '__main__':
     unittest.main()
