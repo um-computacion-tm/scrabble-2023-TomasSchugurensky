@@ -97,7 +97,17 @@ class ScrabbleGame:
             if self.turn == 0:  
                 self.current_players = self.players
     
-
+def main():
+    try:
+        players_count = int (input('Cantidad de jugadores?: '))
+        if players_count <= 1 or players_count > 4:
+            raise ValueError
+        
+    except ValueError:
+        print ('valor invalido')
+    scrabble_game = ScrabbleGame(players_count=players_count)
+    print (len(players_count.players))
+    scrabble_game.next_turn()
         
 
 
