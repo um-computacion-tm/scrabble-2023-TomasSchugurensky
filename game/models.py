@@ -3,6 +3,13 @@ class Tile:
     def __init__(self, letter, values):
         self.letter = letter
         self.values = values 
+    
+    def calculate_word_value(word):
+        total_value = 0
+        for cell in word:
+            for value in cell.letter.values:
+                total_value += value
+        return total_value
 
 class BagTile:
     def __init__(self): 
@@ -65,13 +72,7 @@ class Cell:
         if self.letter is None:
             return 0
         return self.letter.values * self.multiplier
-        
     
-    def calculate_word_value(self):
-        pass
-
-
-
 class ScrabbleGame:
     def __init__(self, players_count):
         self.board = Board()
