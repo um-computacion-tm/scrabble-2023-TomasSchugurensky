@@ -88,5 +88,17 @@ class TestScrabble(unittest.TestCase):
         scrabble_game.next_turn()
         assert scrabble_game.current_player == scrabble_game.players[0]
 
+class TestCalculateWordValue(unittest.TestCase):
+    def test_simple(self):
+        word = [
+            Cell(letter=Tile('C', 1)),
+            Cell(letter=Tile('A', 1)),
+            Cell(letter=Tile('S', 2)),
+            Cell(letter=Tile('A', 1)),
+        ]
+
+        value = calculate_word_value(word)
+        self.assertEqual(value, 5)
+
 if __name__ == '__main__':
     unittest.main()
