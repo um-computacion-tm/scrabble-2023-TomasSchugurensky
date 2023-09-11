@@ -55,8 +55,18 @@ class Board:
             [None for _ in range (15)]     
             for _ in range (15)
         ]
-    def validate_word ():  
-        pass
+
+    def validate_word(self,word,location,orientation): 
+        x, y = location
+        word_len = len(word)
+        if orientation == 1:
+            if x + word_len > 15:
+                return False
+        if orientation == 2:
+            if y + word_len > 15:
+                return False
+        else:
+            return False
 
 class Cell:
     def __init__(self, multiplier=None, multiplier_type=None, letter=None):
