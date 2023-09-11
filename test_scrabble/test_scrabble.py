@@ -39,6 +39,14 @@ class TestBoard(unittest.TestCase):
         board = Board()
         self.assertEqual(len(board.grid), 15)
         self.assertEqual(len(board.grid[0]), 15)
+    
+    def test_validate(self):  
+        board = Board()
+        word = 'Facultad'
+        location = (5,10)
+        orientation = 4
+        word_is_valid = board.validate_word(word,location,orientation)
+        assert word_is_valid == True
 
 class TestCell(unittest.TestCase):
     def test_cell(self):

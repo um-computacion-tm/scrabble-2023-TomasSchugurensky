@@ -8,3 +8,4 @@
 #07/09/2023: Add main
 #09/09/2023: Add more methods to main
 #10/09/2023: Add method "calculate word value" to class Tile
+#11/09/2023: Add method "validate word" to class Board
