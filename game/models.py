@@ -67,6 +67,20 @@ class Board:
                 return False
         else:
             return False
+    
+    def put_words(self,word,location,orientation):
+        if not self.validate_word(word, location, orientation):
+            return False
+        x, y = location
+        word_len = len(word)
+        if orientation == 1:
+            for i in range(word_len):
+                self.grid[x + i][y] = word[i]
+        if orientation == 2:
+            for i in range(word_len):
+                self.grid[x][y + i] = word[i]
+        return True
+
 
 class Cell:
     def __init__(self, multiplier=None, multiplier_type=None, letter=None):
