@@ -51,37 +51,33 @@ class Player:
 
 class Board:
     def __init__(self):
-        self.grid = [
-            [None for _ in range (15)]     
-            for _ in range (15)
-        ]
+        self.grid = [[Cell(1, "", "") for _ in range(15)] for _ in range(15)]
 
-    def validate_word(self,word,location,orientation): 
-        x, y = location
-        word_len = len(word)
-        if orientation == 1:
-            if x + word_len > 15:
-                return False
-        if orientation == 2:
-            if y + word_len > 15:
-                return False
-        else:
-            return False
+    @staticmethod
+    def calculate_word_value(word: list[Cell]) -> int:
+        value: int = 0
+        multiplier_word = None
+        for cell in word:
+            value = value + cell.calculate_value()
+            if cell.multiplier_type == "word" and cell.active:
+                multiplier_word = cell.multiplier
+        if multiplier_word:
+            value = value * multiplier_word
+        return value
     
-    def put_words(self,word,location,orientation):
+    def put_words(self, word, location, orientation):
         if not self.validate_word(word, location, orientation):
             return False
         x, y = location
         word_len = len(word)
-        if orientation == 1:
-            for i in range(word_len):
-                self.grid[x + i][y] = word[i]
-        if orientation == 2:
+        if orientation == "H":
             for i in range(word_len):
                 self.grid[x][y + i] = word[i]
+        if orientation == "V":
+            for i in range(word_len):
+                self.grid[x + i][y] = word[i]
         return True
-
-
+    
 class Cell:
     def __init__(self, multiplier=None, multiplier_type=None, letter=None):
         self.multiplier = multiplier
@@ -122,6 +118,9 @@ class ScrabbleGame:
             if self.turn == 0:  
                 self.current_players = self.players
     
+
+
+
 def main():
     try:
         players_count = int(input('Cantidad de jugadores?: '))
@@ -143,7 +142,7 @@ def main():
         print('Valor inválido')
     except Exception as e:
         print(f'Error: {e}')
-        print('Otro error inesperado')
+        print('Error inesperado')
         
 
 
