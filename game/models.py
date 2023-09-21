@@ -78,6 +78,19 @@ class Board:
                 self.grid[x + i][y] = word[i]
         return True
     
+    def validate_word_inside_board(self, word, location, orientation):
+        x, y = location
+        word_length = len(word)
+        if orientation == "H": 
+            if x < 0 or x >= 15 or y < 0 or y + word_length > 15:
+                return False
+        elif orientation == "V": 
+            if x < 0 or x + word_length > 15 or y < 0 or y >= 15:
+                return False
+        else:
+            return False
+        return True
+
 class Cell:
     def __init__(self, multiplier=None, multiplier_type=None, letter=None):
         self.multiplier = multiplier
