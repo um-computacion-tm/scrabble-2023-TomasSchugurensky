@@ -58,6 +58,17 @@ class TestBoard(unittest.TestCase):
 
         assert word_is_valid == True
 
+    def test_word_out_of_board(self):
+        board = Board()
+        word = "Facultad"
+        location = (14, 4)
+        orientation = "H"
+
+        word_is_valid = board.validate_word_inside_board(word, location, orientation)
+
+        assert word_is_valid == False
+
+
 class TestCell(unittest.TestCase):
     def test_cell(self):
         cell = Cell(multiplier=2, multiplier_type='letter')
@@ -113,10 +124,6 @@ class TestCalculateWordValue(unittest.TestCase):
             Cell(letter=Tile('A', 1)),
             Cell(letter=Tile('S', 2)),
             Cell(letter=Tile('A', 1)),
-        ]
-
-        #value = calculate_word_value(word)
-        #self.assertEqual(value, 5)            #Esto no anda porque no se puede importar el calculate
-
+        ]      
 if __name__ == '__main__':
     unittest.main()
