@@ -68,6 +68,10 @@ class TestBoard(unittest.TestCase):
 
         assert word_is_valid == False
 
+    def test_board_is_empty(self):
+        board = Board()
+        assert board.is_empty == True
+
 
 class TestCell(unittest.TestCase):
     def test_cell(self):

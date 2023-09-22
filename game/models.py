@@ -90,6 +90,13 @@ class Board:
         else:
             return False
         return True
+    
+    def is_empty(self):
+        for row in self.grid:
+            for cell in row:
+                if cell.value != "":
+                    return False 
+        return True
 
 class Cell:
     def __init__(self, multiplier=None, multiplier_type=None, letter=None):
