@@ -13,3 +13,4 @@
 #20/09/2023: Add method "word inside board if empy/not empy and if horizontal/vertical" to class Board 
 #21/09/2023: Add method "validate word inside board" to class Board
 #22/09/2023: Add a property "is empty" to class Board
+#23/09/2023: Add a method "validate word in Board" to class Board
