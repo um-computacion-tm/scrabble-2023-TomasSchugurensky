@@ -97,6 +97,22 @@ class Board:
                 if cell.value != "":
                     return False 
         return True
+    
+    def validate_word_place_board(self, word, location, orientation):
+        if not self.validate_word_inside_board(word, location, orientation):
+            return False
+        x, y = location
+        word_len = len(word)
+
+        if orientation == "H":
+            for i in range(word_len):
+                if self.grid[x][y + i].value != "":
+                    return False
+        if orientation == "V":
+            for i in range(word_len):
+                if self.grid[x + i][y].value != "":
+                    return False
+        return True
 
 class Cell:
     def __init__(self, multiplier=None, multiplier_type=None, letter=None):

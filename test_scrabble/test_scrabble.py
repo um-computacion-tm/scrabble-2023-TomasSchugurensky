@@ -72,6 +72,14 @@ class TestBoard(unittest.TestCase):
         board = Board()
         assert board.is_empty == True
 
+    def test_place_word_empty_board_horizontal_fine(self):
+        board = Board()
+        word = "Facultad"
+        location = (7, 4)
+        orientation = "H"
+        word_is_valid = board.validate_word_place_board(word, location, orientation)
+        assert word_is_valid == True
+
 
 class TestCell(unittest.TestCase):
     def test_cell(self):
