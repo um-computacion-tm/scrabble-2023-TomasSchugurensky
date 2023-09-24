@@ -106,14 +106,15 @@ class Board:
 
         if orientation == "H":
             for i in range(word_len):
-                if self.grid[x][y + i].value != "":
-                    return False
+                if x < 0 or x >= 15 or y + i < 0 or y + i >= 15 or self.grid[x][y + i].value != "":
+                    return False  
         if orientation == "V":
             for i in range(word_len):
-                if self.grid[x + i][y].value != "":
-                    return False
+                if x + i < 0 or x + i >= 15 or y < 0 or y >= 15 or self.grid[x + i][y].value != "":
+                    return False 
+                
         return True
-
+    
 class Cell:
     def __init__(self, multiplier=None, multiplier_type=None, letter=None):
         self.multiplier = multiplier
