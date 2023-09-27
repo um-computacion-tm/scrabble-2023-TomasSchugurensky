@@ -15,3 +15,4 @@
 #22/09/2023: Add a property "is empty" to class Board
 #23/09/2023: Add a method "validate word in Board" to class Board
 #24/09/2023: Modify "validate word in Board" 
+#26/09/2023: Add the rest of the letters in class BagTile
