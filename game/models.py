@@ -70,6 +70,13 @@ class Player:
             return len(additional_tiles)  
         else:
             return 0
+        
+    def has_letters(self, tiles):
+        player_tiles = [tile.letter for tile in self.tiles]
+        for tile in tiles:
+            if tile.letter not in player_tiles:
+                return False
+        return True
 
 class Board:
     def __init__(self):
@@ -202,6 +209,3 @@ def main():
     except Exception as e:
         print(f'Error: {e}')
         print('Error inesperado')
-        
-
-

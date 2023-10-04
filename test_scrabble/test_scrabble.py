@@ -34,6 +34,28 @@ class TestPlayer(unittest.TestCase):
             0,
         )
 
+    def test_validate_has_letters(self):
+        player= Player()
+        bag_tile = BagTile()
+        bag_tile.tiles=[
+            Tile(letter='H', values=1),
+            Tile(letter='O', values=1),
+            Tile(letter='L', values=1),
+            Tile(letter='A', values=1),
+            Tile(letter='A', values=1),
+            Tile(letter='A', values=1),
+            Tile(letter='A', values=1),
+        ]
+        tiles = [
+            Tile(letter='H', values=1),
+            Tile(letter='O', values=1),
+            Tile(letter='L', values=1),
+            Tile(letter='A', values=1),
+        ]
+        is_valid = player.has_letters(tiles)
+
+        assert is_valid
+
 class TestBoard(unittest.TestCase):
     def test_board(self):
         board = Board()
