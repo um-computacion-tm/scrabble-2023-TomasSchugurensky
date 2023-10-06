@@ -18,3 +18,4 @@
 #26/09/2023: Add the rest of the letters in class BagTile
 #04/10/2023: Add  method "has letters" in class Player
 #05/10/2023: Separate code in different files for easier maintenance 
+#06/10/2023: Add method "show board" to class Board
