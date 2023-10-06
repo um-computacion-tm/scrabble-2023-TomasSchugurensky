@@ -63,3 +63,12 @@ class Board:
                 if x + i < 0 or x + i >= 15 or y < 0 or y >= 15 or self.grid[x + i][y].value != "":
                     return False         
         return True
+    
+    def show_board(board):
+        print('\n  |' + ''.join([f' {str(row_index).rjust(2)} ' for row_index in range(15)]))
+        for row_index, row in enumerate(board.grid):
+            print(
+            str(row_index).rjust(2) +
+            '| ' +
+            ' '.join([repr(cell) for cell in row])
+        )
