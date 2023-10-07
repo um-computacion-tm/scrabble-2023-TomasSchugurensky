@@ -19,3 +19,4 @@
 #04/10/2023: Add  method "has letters" in class Player
 #05/10/2023: Separate code in different files for easier maintenance 
 #06/10/2023: Add method "show board" to class Board
+#07/10/2023: Separate test in different files 
