@@ -20,3 +20,4 @@
 #05/10/2023: Separate code in different files for easier maintenance 
 #06/10/2023: Add method "show board" to class Board
 #07/10/2023: Separate test in different files 
+#08/10/2023: Add a repr to class Tile and class Cell and change the main code

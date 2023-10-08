@@ -41,6 +41,7 @@ class Board:
             return False
         return True
     
+    @property
     def is_empty(self):
         for row in self.grid:
             for cell in row:
@@ -64,7 +65,7 @@ class Board:
                     return False         
         return True
     
-    def show_board(board):
+def show_board(board):
         print('\n  |' + ''.join([f' {str(row_index).rjust(2)} ' for row_index in range(15)]))
         for row_index, row in enumerate(board.grid):
             print(
