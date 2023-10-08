@@ -9,3 +9,6 @@ class Tile:
             for value in cell.letter.values:
                 total_value += value
         return total_value
+    
+    def __repr__(self):
+        return f"{self.letter}:{self.value}"

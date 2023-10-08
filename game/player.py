@@ -17,3 +17,6 @@ class Player:
             if tile.letter not in player_tiles:
                 return False
         return True
+    
+def show_player(self):
+    pass
