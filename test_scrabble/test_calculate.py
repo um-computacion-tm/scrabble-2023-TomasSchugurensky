@@ -5,7 +5,7 @@ from game.cell import Cell
 class TestCalculateWordValue(unittest.TestCase):
     def test_simple(self):
         word = [
-            Cell(letter=Tile('C', 1)),
+            Cell(letter=Tile('C', 3)),
             Cell(letter=Tile('A', 1)),
             Cell(letter=Tile('S', 2)),
             Cell(letter=Tile('A', 1)),

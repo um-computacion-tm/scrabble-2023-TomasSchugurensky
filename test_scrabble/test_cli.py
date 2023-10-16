@@ -1,3 +1,6 @@
+from game.get_player import get_player_count
+from unittest.mock import patch
+
 class TestCLI(unittest.TestCase):
 
     @patch('builtins.input', return_value='3')
