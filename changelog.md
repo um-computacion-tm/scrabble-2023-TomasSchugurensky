@@ -22,3 +22,4 @@
 #07/10/2023: Separate test in different files 
 #08/10/2023: Add a repr to class Tile and class Cell and change the main code
 #09/10/2023: Add "get player count", "testCLI" and test for main
+#16/10/2023: Change all the class "BagTile" to satisfy the game rules 

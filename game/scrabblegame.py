@@ -27,10 +27,16 @@ class ScrabbleGame:
             self.current_player = next_player  
             if self.turn == 0:  
                 self.current_players = self.players
+
+    def calculate_word_value(self):
+        pass
+
+    def get_words_input(self):
+        pass
     
     def play(self, word, location, orientation):
         self.validate_word(word, location, orientation)
-        words = self.board.put_words(word, location, orientation)
+        words = self.board.put_words(word, location, orientation, self.get_current_player())
         total = calculate_words_value(words)
         self.players[self.current_player].score += total
         self.next_turn()
@@ -45,3 +51,5 @@ class ScrabbleGame:
             raise InvalidPlaceWordException("Su palabra excede el tablero")
         if not self.board.validate_word_place_board(word, location, orientation):
             raise InvalidPlaceWordException("Su palabra esta mal puesta en el tablero")
+        
+    if not self.get_current_player().has_letters(missing letters)

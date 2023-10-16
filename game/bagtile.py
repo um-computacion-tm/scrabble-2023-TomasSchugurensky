@@ -3,33 +3,73 @@ from game.tile import Tile
 class BagTile:
     def __init__(self): 
         self.tiles =[
-            Tile('A',1),
-            Tile('B',2),
-            Tile('C',3),  
-            Tile('D',4),
-            Tile('E',5), 
-            Tile('F',6),
-            Tile('G',7),
-            Tile('H',8),
-            Tile('I',9),
-            Tile('J',10),
-            Tile('K',11),
-            Tile('L',12),
-            Tile('M',13),
-            Tile('N',14),
-            Tile('Ñ',15),
-            Tile('O',16),
-            Tile('P',17),
-            Tile('Q',18),
-            Tile('R',19),
-            Tile('S',20),
-            Tile('T',21),
-            Tile('U',22),
-            Tile('V',23),
-            Tile('W',24),
-            Tile('X',25),
-            Tile('Y',26),
-            Tile('Z',27),
+            Tile('A',1), Tile('A',1), Tile('A',1), Tile('A',1), Tile('A',1), Tile('A',1), 
+            Tile('A',1), Tile('A',1), Tile('A',1), Tile('A',1), Tile('A',1), Tile('A',1),
+
+            Tile('B',5), Tile('B',5),
+
+            Tile('C',3), Tile('C',3), Tile('C',3), Tile('C',3),  
+
+            Tile('D',2), Tile('D',2), Tile('D',2), Tile('D',2), Tile('D',2),
+
+            Tile('E',1), Tile('E',1), Tile('E',1), Tile('E',1), Tile('E',1), Tile('E',1),
+            Tile('E',1), Tile('E',1), Tile('E',1), Tile('E',1), Tile('E',1), Tile('E',1),
+
+            Tile('F',4),
+
+            Tile('G',2), Tile('G',2),
+
+            Tile('H',4), Tile('H',4),
+
+            Tile('I',1), Tile('I',1), Tile('I',1), Tile('I',1),Tile('I',1), Tile('I',1),
+
+            Tile('J',8),
+
+            Tile('K',8),
+
+            Tile('L',1), Tile('L',1), Tile('L',1), Tile('L',1),
+
+            Tile('M',3), Tile('M',3),
+
+            Tile('N',1), Tile('N',1), Tile('N',1), Tile('N',1), Tile('N',1),
+
+            Tile('Ñ',8),
+
+            Tile('O',1), Tile('O',1), Tile('O',1), Tile('O',1), Tile('O',1), Tile('O',1), 
+            Tile('O',1), Tile('O',1), Tile('O',1),
+
+            Tile('P',3), Tile('P',3),
+
+            Tile('Q',5),
+
+            Tile('R',1), Tile('R',1), Tile('R',1), Tile('R',1), Tile('R',1),
+
+            Tile('S',1), Tile('S',1), Tile('S',1), Tile('S',1), Tile('S',1), Tile('S',1),
+
+            Tile('T',1), Tile('T',1), Tile('T',1), Tile('T',1),
+
+            Tile('U',1), Tile('U',1), Tile('U',1), Tile('U',1), Tile('U',1),
+
+            Tile('V',4),
+
+            Tile('W',8),
+
+            Tile('X',8),
+
+            Tile('Y',4),
+
+            Tile('Z',10),
+
+            #Letras especiales
+
+            Tile('CH',5),
+
+            Tile('LL',8),
+
+            Tile('RR',8),
+
+            Tile('',0),
+
             ]
         
         random.shuffle(self.tiles)
