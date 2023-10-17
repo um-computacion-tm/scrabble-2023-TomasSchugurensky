@@ -15,7 +15,7 @@ class TestPlayer(unittest.TestCase):
         player= Player()
         bag_tile = BagTile()
         bag_tile.tiles=[
-            Tile(letter='H', values=1),
+            Tile(letter='H', values=4),
             Tile(letter='O', values=1),
             Tile(letter='L', values=1),
             Tile(letter='A', values=1),
@@ -24,7 +24,7 @@ class TestPlayer(unittest.TestCase):
             Tile(letter='A', values=1),
         ]
         tiles = [
-            Tile(letter='H', values=1),
+            Tile(letter='H', values=4),
             Tile(letter='O', values=1),
             Tile(letter='L', values=1),
             Tile(letter='A', values=1),
