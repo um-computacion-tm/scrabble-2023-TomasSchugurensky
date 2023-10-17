@@ -19,4 +19,5 @@ class Player:
         return True
     
 def show_player(self):
-    pass
+        print(f"Nombre del jugador: {self.name}")
+        print("Fichas del jugador:", ", ".join([tile.letter for tile in self.tiles]))

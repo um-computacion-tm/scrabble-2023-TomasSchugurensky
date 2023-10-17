@@ -1,6 +1,7 @@
 from game.get_player import get_player_count
 from game.scrabblegame import ScrabbleGame
 from game.models import show_board
+from game.player import show_player
 
 
 def main():
