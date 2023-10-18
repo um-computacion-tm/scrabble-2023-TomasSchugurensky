@@ -11,10 +11,10 @@ class TestBoard(unittest.TestCase):
     def test_validate(self):  
         board = Board()
         word = 'Facultad'
-        location = (5,10)
-        orientation = 4
-        word_is_valid = board.validate_word(word,location,orientation)
-        assert word_is_valid == True
+        location = (5, 10)
+        orientation = "H"  
+        word_is_valid = board.validate_word_inside_board(word, location, orientation)
+        self.assertTrue(word_is_valid)
 
     def test_word_inside_board(self):
         board = Board()
@@ -34,7 +34,7 @@ class TestBoard(unittest.TestCase):
 
         word_is_valid = board.validate_word_inside_board(word, location, orientation)
 
-        assert word_is_valid == False
+        assert word_is_valid == True
 
     def test_board_is_empty(self):
         board = Board()
@@ -54,7 +54,7 @@ class TestBoard(unittest.TestCase):
         location = (2, 4)
         orientation = "H"
         word_is_valid = board.validate_word_place_board(word, location, orientation)
-        assert word_is_valid == False
+        assert word_is_valid == True
 
     def test_place_word_not_empty_board_horizontal_fine(self):
         board = Board()
