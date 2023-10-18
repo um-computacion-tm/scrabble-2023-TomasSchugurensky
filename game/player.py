@@ -1,13 +1,18 @@
+from game.bagtile import BagTile
+from game.tile import Tile
+
 class Player:
     def __init__(self, bag_tiles):
-        self.tiles = bag_tiles.take(7)
+        self.tiles = bag_tiles.take(7)    
     
     def rellenar(self, bag_tiles):
         tiles_needed = 7 - len(self.tiles)
         if tiles_needed > 0:
             additional_tiles = bag_tiles.take(tiles_needed)
-            self.tiles += additional_tiles
-            return len(additional_tiles)  
+            for tile in additional_tiles:
+                if isinstance(tile, Tile):
+                    self.tiles.append(tile)
+            return len(additional_tiles)
         else:
             return 0
         
@@ -21,3 +26,6 @@ class Player:
 def show_player(self):
         print(f"Nombre del jugador: {self.name}")
         print("Fichas del jugador:", ", ".join([tile.letter for tile in self.tiles]))
+
+bag_tiles = BagTile()
+player = Player(bag_tiles)

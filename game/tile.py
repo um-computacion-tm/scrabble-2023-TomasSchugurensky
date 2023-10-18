@@ -3,11 +3,9 @@ class Tile:
         self.letter = letter
         self.values = values 
     
-    def calculate_word_value(word):
+    def calculate_word_value(self):
         total_value = 0
-        for cell in word:
-            for value in cell.letter.values:
-                total_value += value
+        total_value += self.values
         return total_value
     
     def __repr__(self):

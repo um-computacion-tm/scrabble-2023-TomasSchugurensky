@@ -3,6 +3,12 @@ from game.bagtile import BagTile
 from game.models import Board
 
 
+class InvalidWordException(Exception):
+    pass
+
+class InvalidPlaceWordException(Exception):
+    pass
+
 class ScrabbleGame:
     def __init__(self, players_count):
         self.board = Board()
@@ -52,4 +58,4 @@ class ScrabbleGame:
         if not self.board.validate_word_place_board(word, location, orientation):
             raise InvalidPlaceWordException("Su palabra esta mal puesta en el tablero")
         
-    if not self.get_current_player().has_letters(missing letters)
+    if not self.get_current_player().has_letters(missingletters)

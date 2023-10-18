@@ -4,6 +4,7 @@ class Cell:
         self.multiplier_type = multiplier_type
         self.letter = letter
         self.active = True
+        self.value = ""
         
     def add_letter(self, letter):
         self.letter = letter   
