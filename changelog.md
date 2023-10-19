@@ -24,4 +24,5 @@
 #09/10/2023: Add "get player count", "testCLI" and test for main
 #16/10/2023: Change all the class "BagTile" to satisfy the game rules 
 #17/10/2023: Add method "show player" to class Player
-#18/10/2023: Fix general code
+#18/10/2023: Fix general code 
+#19/10/2023: Add method "calculate words value" to class Scrabblegame
