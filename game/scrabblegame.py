@@ -53,7 +53,12 @@ class ScrabbleGame:
 
 
     def get_words_input(self):
-        pass
+        word_input = input("Ingrese la palabra que desea jugar: ").strip()
+        location_input = input("Ingrese la ubicación de la palabra (fila, columna): ").strip()
+        orientation_input = input("Ingrese la orientación (horizontal o vertical): ").strip()
+
+        return word_input, location_input, orientation_input
+
     
     def play(self, word, location, orientation):
         self.validate_word(word, location, orientation)
