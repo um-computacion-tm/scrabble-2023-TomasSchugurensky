@@ -22,10 +22,14 @@ class Board:
         word_len = len(word)
         if orientation == "H":
             for i in range(word_len):
-                self.grid[x][y + i] = word[i]
+                if x < 0 or x >= 15 or y + i < 0 or y + i >= 15 or not self.is_empty:
+                    return False
+                self.grid[x][y + i] = Cell(1, word[i], "")  
         if orientation == "V":
             for i in range(word_len):
-                self.grid[x + i][y] = word[i]
+                if x + i < 0 or x + i >= 15 or y < 0 or y >= 15 or not self.is_empty:
+                    return False
+                self.grid[x + i][y] = Cell(1, word[i], "")  
         return True
     
     def validate_word_inside_board(self, word, location, orientation):
@@ -65,11 +69,11 @@ class Board:
                     return False
         return True
     
-def show_board(board):
+    def show_board(self):
         print('\n  |' + ''.join([f' {str(row_index).rjust(2)} ' for row_index in range(15)]))
-        for row_index, row in enumerate(board.grid):
+        for row_index, row in enumerate(self.grid):
             print(
-            str(row_index).rjust(2) +
-            '| ' +
-            ' '.join([repr(cell) for cell in row])
-        )
+                str(row_index).rjust(2) +
+                '| ' +
+                ' '.join([cell.value for cell in row])
+            )
