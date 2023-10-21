@@ -5,7 +5,7 @@ class DictionaryConnectionError(Exception):
     ...
 
 
-def validate_word(word):
+def dict_validate_word(word):
     search = dle.search_by_word(word=word)
     if search is None:
         raise DictionaryConnectionError()

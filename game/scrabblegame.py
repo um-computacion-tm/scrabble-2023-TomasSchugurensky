@@ -1,7 +1,7 @@
 from game.player import Player
 from game.bagtile import BagTile
 from game.models import Board
-
+from game.dictionary import dict_validate_word
 
 class InvalidWordException(Exception):
     pass
@@ -59,23 +59,27 @@ class ScrabbleGame:
 
         return word_input, location_input, orientation_input
 
-    
-    def play(self, word, location, orientation):
-        self.validate_word(word, location, orientation)
-        words = self.board.put_words(word, location, orientation, self.get_current_player())
-        total = calculate_words_value(words)
-        self.players[self.current_player].score += total
-        self.next_turn()
-
     def next_turn(self):
         self.current_player = (self.current_player + 1) % len(self.players)
 
+    def play(self, word, location, orientation):
+        try:
+            self.validate_word(word, location, orientation)
+            word = self.board.put_words(word, location, orientation)
+            total = self.calculate_words_value(word)
+            self.players[self.current_player].score += total
+            self.next_turn()
+        except InvalidWordException as e:
+            print(f"Error: {e}")
+        except InvalidPlaceWordException as e:
+            print(f"Error: {e}")
+    
     def validate_word(self, word, location, orientation):
         if not dict_validate_word(word):
-            raise InvalidWordException("Su palabra no existe en el diccionario")
+            raise InvalidWordException("Palabra no existe")
         if not self.board.validate_word_inside_board(word, location, orientation):
-            raise InvalidPlaceWordException("Su palabra excede el tablero")
+            raise InvalidPlaceWordException("Palabra excede el tablero")
         if not self.board.validate_word_place_board(word, location, orientation):
-            raise InvalidPlaceWordException("Su palabra esta mal puesta en el tablero")
-        
-    if not self.get_current_player().has_letters(missingletters)
+            raise InvalidPlaceWordException("Palabra mal puesta")
+        if not self.current_player.has_letters(missing_letters):
+            print("El jugador no tiene las letras necesarias.")
