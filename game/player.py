@@ -29,3 +29,11 @@ def show_player(self):
 
 bag_tiles = BagTile()
 player = Player(bag_tiles)
+
+def get_inputs(self):
+    word_input = input("Ingrese palabra: ").strip()
+    location_input = input("Ingrese la ubicación (fila, columna): ").strip()
+    orientation_input = input("Ingrese la orientación (horizontal o vertical): ").strip()
+
+    return word_input, location_input, orientation_input
+

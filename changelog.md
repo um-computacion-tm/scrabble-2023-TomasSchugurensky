@@ -28,3 +28,4 @@
 #19/10/2023: Add method "calculate words value" to class Scrabblegame
 #20/10/2023: Add method "get words imput" to class Scrabblegame
 #21/10/2023: Fix code in cell, tile, models and scrabblegame
+#25/10/2023: Fix scrabblegame, player, models and add more methods to main
