@@ -1,7 +1,13 @@
 from game.cell import Cell
+double_letter_coordinates = [(4, 1), (12, 1), (1, 4), (8, 4), (15, 4), (3, 7), (7, 7), (9, 7), (13, 7), (4, 10), (12, 10), (0, 12), (7, 12), (14, 12), (3, 15), (11, 15)]
+triple_letter_coordinates = [(6, 2), (10, 2), (2, 6), (6, 6), (10, 6), (14, 6), (1, 8), (5, 8), (9, 8), (13, 8), (2, 10), (6, 10), (10, 10), (14, 10), (6, 14), (10, 14)]
+double_word_coordinates = [(1, 1), (8, 1), (15, 1), (2, 2), (14, 2), (3, 3), (13, 3), (4, 4), (12, 4), (7, 7), (11, 7), (4, 12), (12, 12), (1, 15), (8, 15), (15, 15)]
+triple_word_coordinates = [(0, 0), (7, 0), (14, 0), (0, 7), (14, 7), (0, 14), (7, 14), (14, 14)]
+
 class Board:
     def __init__(self):
         self.grid = [[Cell(1, "", "") for _ in range(15)] for _ in range(15)]
+        self.is_cell_occupied = [[False] * 15 for _ in range(15)]
 
     @staticmethod
     def calculate_word_value(word: list[Cell]) -> int:
@@ -20,17 +26,21 @@ class Board:
             return False
         x, y = location
         word_len = len(word)
+
         if orientation == "H":
             for i in range(word_len):
-                if x < 0 or x >= 15 or y + i < 0 or y + i >= 15 or not self.is_empty:
+                if self.is_cell_occupied[x][y + i]:
                     return False
-                self.grid[x][y + i] = Cell(1, word[i], "")  
+                self.grid[x][y + i].add_letter(word[i])
+                self.is_cell_occupied[x][y + i] = True
         if orientation == "V":
             for i in range(word_len):
-                if x + i < 0 or x + i >= 15 or y < 0 or y >= 15 or not self.is_empty:
+                if self.is_cell_occupied[x + i][y]:
                     return False
-                self.grid[x + i][y] = Cell(1, word[i], "")  
+                self.grid[x + i][y].add_letter(word[i])
+                self.is_cell_occupied[x + i][y] = True
         return True
+
     
     def validate_word_inside_board(self, word, location, orientation):
         x, y = location
@@ -69,11 +79,26 @@ class Board:
                     return False
         return True
     
-    def show_board(self):
-        print('\n  |' + ''.join([f' {str(row_index).rjust(2)} ' for row_index in range(15)]))
-        for row_index, row in enumerate(self.grid):
-            print(
-                str(row_index).rjust(2) +
-                '| ' +
-                ' '.join([cell.value for cell in row])
-            )
+def show_board(self):
+    print('\n  |' + ''.join([f' {str(row_index).rjust(2)} ' for row_index in range(15)]))
+    for row_index, row in enumerate(self.grid):
+        print(
+            str(row_index).rjust(2) +
+            '| ' +
+            ' '.join([cell.value if cell.value else "   " for cell in row])
+        )
+    
+def cell_repr(self, cell, row, col):
+    if cell.value:
+        return repr(cell.letter)
+
+    if (row, col) in double_letter_coordinates:
+        return 'DL'
+    elif (row, col) in triple_letter_coordinates:
+        return 'TL'
+    elif (row, col) in double_word_coordinates:
+        return 'DW'
+    elif (row, col) in triple_word_coordinates:
+        return 'TW'
+
+    return '   '

@@ -51,23 +51,16 @@ class ScrabbleGame:
                 total_value += 0
         return total_value
 
-
-    def get_words_input(self):
-        word_input = input("Ingrese la palabra que desea jugar: ").strip()
-        location_input = input("Ingrese la ubicación de la palabra (fila, columna): ").strip()
-        orientation_input = input("Ingrese la orientación (horizontal o vertical): ").strip()
-
-        return word_input, location_input, orientation_input
-
     def next_turn(self):
-        self.current_player = (self.current_player + 1) % len(self.players)
+        self.turn = (self.turn + 1) % len(self.current_players)
+        self.current_player = self.current_players[self.turn]
 
     def play(self, word, location, orientation):
         try:
             self.validate_word(word, location, orientation)
-            word = self.board.put_words(word, location, orientation)
-            total = self.calculate_words_value(word)
-            self.players[self.current_player].score += total
+            played_word = self.board.put_words(word, location, orientation)
+            total = self.calculate_words_value(played_word)
+            self.players[self.turn].score += total
             self.next_turn()
         except InvalidWordException as e:
             print(f"Error: {e}")
@@ -75,11 +68,13 @@ class ScrabbleGame:
             print(f"Error: {e}")
     
     def validate_word(self, word, location, orientation):
+        required_letters = list(word)
         if not dict_validate_word(word):
             raise InvalidWordException("Palabra no existe")
         if not self.board.validate_word_inside_board(word, location, orientation):
             raise InvalidPlaceWordException("Palabra excede el tablero")
         if not self.board.validate_word_place_board(word, location, orientation):
             raise InvalidPlaceWordException("Palabra mal puesta")
-        if not self.current_player.has_letters(missing_letters):
-            print("El jugador no tiene las letras necesarias.")
+    
+        if not self.current_player.has_letters(required_letters):
+            raise InvalidPlaceWordException("No tenes las letras requeridas")

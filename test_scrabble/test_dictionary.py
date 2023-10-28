@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 from game.dictionary import (
-    validate_word,
+    dict_validate_word,
     DictionaryConnectionError,
 )
 
@@ -14,7 +14,7 @@ class TestDiccionary(unittest.TestCase):
         )
     )
     def test_valid(self, search_by_word_patched):
-        self.assertTrue(validate_word('hola'))
+        self.assertTrue(dict_validate_word('hola'))
 
     @patch(
         'pyrae.dle.search_by_word',
@@ -23,7 +23,7 @@ class TestDiccionary(unittest.TestCase):
         )
     )
     def test_invalid(self, search_by_word_patched):
-        self.assertFalse(validate_word('asd'))
+        self.assertFalse(dict_validate_word('asd'))
 
     @patch(
         'pyrae.dle.search_by_word',
@@ -31,7 +31,8 @@ class TestDiccionary(unittest.TestCase):
     )
     def test_connection_error(self, search_by_word_patched):
         with self.assertRaises(DictionaryConnectionError):
-            validate_word('hola')
+            dict_validate_word('hola')
+
 
 if __name__ == '__main__':
     unittest.main()

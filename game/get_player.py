@@ -8,7 +8,3 @@ def get_player_count():
             print('ingrese un numero por favor')
 
     return player_count
-
-def got_coordinates(axis):
-    while True:
-        pass
