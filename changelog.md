@@ -29,3 +29,5 @@
 #20/10/2023: Add method "get words imput" to class Scrabblegame
 #21/10/2023: Fix code in cell, tile, models and scrabblegame
 #25/10/2023: Fix scrabblegame, player, models and add more methods to main
+#28/10/2023: Add method skip_turn to Main and fix code 
+#29/10/2023: Improve coverage
