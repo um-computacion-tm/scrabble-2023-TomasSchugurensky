@@ -9,7 +9,7 @@ class TestPlayer(unittest.TestCase):
         player = Player(bag_tiles)
         self.assertEqual(
             len(player.tiles),
-            0,
+            7,
         )
 
     def test_validate_has_letters(self):

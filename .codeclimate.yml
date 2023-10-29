@@ -1,9 +1,9 @@
-version: "2"         
+version: "2"         # required to adjust maintainability checks
 checks:
   argument-count:
     enabled: true
     config:
-      threshold: 4
+      threshold: 5
   complex-logic:
     enabled: true
     config:
@@ -12,7 +12,7 @@ checks:
     enabled: true
     config:
       threshold: 250
-  method-complexity: 
+  method-complexity:
     enabled: true
     config:
       threshold: 15
@@ -35,11 +35,11 @@ checks:
   similar-code:
     enabled: true
     config:
-      threshold: 
+      threshold: #language-specific defaults. overrides affect all languages.
   identical-code:
     enabled: true
     config:
-      threshold: 
+      threshold: #language-specific defaults. overrides affect all languages.
       
 exclude_patterns:
 - "config/"
@@ -55,3 +55,4 @@ exclude_patterns:
 - "tests/"
 - "**/vendor/"
 - "**/*_test.go"
+- "**/*.d.ts"

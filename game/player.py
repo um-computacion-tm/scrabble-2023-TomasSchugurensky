@@ -36,4 +36,3 @@ def get_inputs(self):
     orientation_input = input("Ingrese la orientación (horizontal o vertical): ").strip()
 
     return word_input, location_input, orientation_input
-
