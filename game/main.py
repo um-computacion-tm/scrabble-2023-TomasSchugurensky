@@ -10,7 +10,7 @@ def main():
     while game.is_playing():
         show_board(game.get_board())
         show_player(*game.get_current_player())
-        accion = input("Ingresa una palabra ('P'), intercambiar fichas ('I'), saltar turno ('S') : ").upper()
+        accion = input("Ingresa una palabra ('P'), intercambiar fichas ('I'), saltar turno ('S') : ").upper() #Hacer: Terminar juego, y shuffle (opcional)
         if accion == 'P':
             word, coords, orientation = get_inputs()
             try:

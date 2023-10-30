@@ -7,7 +7,7 @@ class TestTiles(unittest.TestCase):
         self.assertEqual(tile.letter,'A')
         self.assertEqual (tile.values, 1 )
 
-    def test_calculate_word_value_defualt(self):
+    def test_calculate_word_value(self):
         tile = Tile('A',1)
         result = tile.calculate_word_value()
         self.assertEqual(result, 1)
@@ -18,9 +18,9 @@ class TestTiles(unittest.TestCase):
         self.assertEqual(result,10)
     
     def test_repr(self):
-        tile = Tile('C', 2)
+        tile = Tile('C', 3)
         result = repr(tile)
-        self.assertEqual(result, 'C:2')
+        self.assertEqual(result, 'C:3')
 
 
 if __name__ == '__main__':

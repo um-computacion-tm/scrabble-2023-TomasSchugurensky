@@ -1,6 +1,6 @@
 [run]
 source =
-    app
+    game
     tests
 omit = 
     env/*
