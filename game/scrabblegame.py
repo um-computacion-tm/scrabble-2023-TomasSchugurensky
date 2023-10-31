@@ -1,7 +1,7 @@
 from game.player import Player
 from game.bagtile import BagTile
 from game.models import Board
-from game.dictionary import dict_validate_word
+from game.dictionary import dict_validate_word, DictionaryConnectionError
 
 class InvalidWordException(Exception):
     pass
@@ -19,11 +19,7 @@ class ScrabbleGame:
         self.turn = 0
         self.current_players = self.players
         self.current_player = self.players[0]
-    
-        
-    def playing(self):  
-        return True
-    
+          
     def next_turn(self):   
         if self.current_players:
             index_player = self.turn
@@ -35,6 +31,12 @@ class ScrabbleGame:
                 self.current_players = self.players
 
     def calculate_words_value(self, word):
+        try:
+            if not dict_validate_word(word):
+                raise InvalidWordException("Palabra no existe en el diccionario")
+        except DictionaryConnectionError:
+            pass
+
         letter_values = {
             'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1, 'F': 4, 'G': 2, 'H': 4,
             'I': 1, 'J': 8, 'K': 5, 'L': 1, 'M': 3, 'N': 1, 'Ñ': 8, 'O': 1, 'P': 3,
@@ -51,9 +53,6 @@ class ScrabbleGame:
                 total_value += 0
         return total_value
 
-    def next_turn(self):
-        self.turn = (self.turn + 1) % len(self.current_players)
-        self.current_player = self.current_players[self.turn]
 
     def play(self, word, location, orientation):
         try:
@@ -75,6 +74,5 @@ class ScrabbleGame:
             raise InvalidPlaceWordException("Palabra excede el tablero")
         if not self.board.validate_word_place_board(word, location, orientation):
             raise InvalidPlaceWordException("Palabra mal puesta")
-    
         if not self.current_player.has_letters(required_letters):
             raise InvalidPlaceWordException("No tenes las letras requeridas")

@@ -3,7 +3,8 @@ from game.tile import Tile
 
 class Player:
     def __init__(self, bag_tiles):
-        self.tiles = bag_tiles.take(7)    
+        self.tiles = bag_tiles.take(7)  
+        self.score = 0  
     
     def rellenar(self, bag_tiles):
         tiles_needed = 7 - len(self.tiles)
@@ -19,7 +20,7 @@ class Player:
     def has_letters(self, tiles):
         player_tiles = [tile.letter for tile in self.tiles]
         for tile in tiles:
-            if tile.letter not in player_tiles:
+            if tile in player_tiles:
                 return False
         return True
     
