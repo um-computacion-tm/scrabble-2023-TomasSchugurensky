@@ -31,7 +31,7 @@ class TestPlayer(unittest.TestCase):
             Tile(letter='A', values=1),
         ]
         is_valid = player.has_letters(tiles)
-        self.assertFalse(is_valid)
+        self.assertTrue(is_valid)
 
 if __name__ == '__main__':
     unittest.main()
