@@ -32,3 +32,4 @@
 #28/10/2023: Add method skip_turn to Main and fix code 
 #29/10/2023: Improve coverage
 #30/10/2023: Fix error in coveragerc
+#31/10/2023: Fix the methods in main
