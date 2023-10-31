@@ -14,11 +14,23 @@ class ScrabbleGame:
         self.board = Board()
         self.players = []
         self.bag_tile = BagTile()
+        self.current_player_index = 0  
         for _ in range(players_count):
-            self.players.append(Player(self.bag_tile)) 
+            self.players.append(Player(self.bag_tile, "nombre"))
         self.turn = 0
         self.current_players = self.players
         self.current_player = self.players[0]
+        self.skipped_turns = 0 
+        
+
+    def is_playing(self):
+        return True
+    
+    def get_board(self):
+        return self.board
+    
+    def get_current_player(self):
+        return self.players[self.current_player_index]
           
     def next_turn(self):   
         if self.current_players:
@@ -29,6 +41,11 @@ class ScrabbleGame:
             self.current_player = next_player  
             if self.turn == 0:  
                 self.current_players = self.players
+    
+    def skip_turn(self):
+        self.skipped_turns += 1
+        self.next_turn()  
+        print(f"Turno saltado. Llevas {self.skipped_turns} turnos saltados.")
 
     def calculate_words_value(self, word):
         try:
