@@ -1,10 +1,10 @@
 import unittest
-from game.get_player import get_player_count
+from game.cli import get_player_count
 from unittest.mock import patch
 
 class TestCLI(unittest.TestCase):
 
-    @patch('builtins.input', return_value='3')
+    @patch('builtins.input', return_value='')
     def test_get_player_count(self, input_patched):
         self.assertEqual(
             get_player_count(),
