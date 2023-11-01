@@ -33,3 +33,5 @@
 #29/10/2023: Improve coverage
 #30/10/2023: Fix error in coveragerc
 #31/10/2023: Fix the methods in main
+Preguntar el miercoles el test valid del scrabblegame, el tablero con los multiplicadores que se imprimen mal, exchange de player y el error de no dejar colocar palabras
+Problemas con el test_main (no corre), test_player y test board

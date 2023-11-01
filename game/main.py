@@ -1,8 +1,7 @@
-from game.get_player import get_player_count
 from game.scrabblegame import ScrabbleGame
-from game.models import show_board
-from game.player import show_player, get_inputs, Player
+from game.cli import show_board, show_player, get_player_count, get_inputs
 from game.bagtile import BagTile
+from game.player import Player
 
 
 def main():
@@ -19,9 +18,9 @@ def main():
         accion = input("Ingresa una palabra ('P'), intercambiar fichas ('I'), saltar turno ('S') : ").upper()
 
         if accion == 'P':
-            word, location, orientation = get_inputs()
+            word, coords, orientation = get_inputs()
             try:
-                game.play(word, location, orientation)
+                game.play(word, coords, orientation)
             except Exception as e:
                 print(e)
 
@@ -29,10 +28,13 @@ def main():
             tiles_to_exchange_input = input("Fichas a intercambiar (separadas por espacios): ")
             tiles_to_exchange = tiles_to_exchange_input.split()
             if all(tile in current_player.tiles for tile in tiles_to_exchange):
-                if current_player.exchange(tiles_to_exchange, bag_tiles):
-                    print("Intercambio exitoso")
-                else:
-                    print("Intercambio erroneo")
+                try:
+                    if current_player.exchange(tiles_to_exchange, bag_tiles):
+                        print("Intercambio exitoso")
+                    else:
+                        print("Intercambio erroneo")
+                except Exception as e:
+                    print(e)
             
         if accion == 'S':
             game.skip_turn()

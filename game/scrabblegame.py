@@ -1,12 +1,9 @@
 from game.player import Player
 from game.bagtile import BagTile
-from game.models import Board
+from game.models import Board, InvalidPlaceWordException
 from game.dictionary import dict_validate_word, DictionaryConnectionError
 
 class InvalidWordException(Exception):
-    pass
-
-class InvalidPlaceWordException(Exception):
     pass
 
 class ScrabbleGame:

@@ -5,6 +5,7 @@ def show_player(self):
 def get_player_count():
     while True:
         try:
+            import pdb; pdb.set_trace()
             player_count = int(input('cantidad de jugadores (1-3): '))
             if player_count <= 3:
                 break
@@ -21,3 +22,17 @@ def show_board(self):
             '| ' +
             ' '.join([cell.value if cell.value else "   " for cell in row])
         )
+
+def get_inputs():
+    word_input = input("Ingrese palabra: ").strip()
+    location_input = input("Ingrese la ubicación (fila, columna): ").strip()
+    orientation_input = input("Ingrese la orientación (horizontal o vertical): ").strip()
+    location_parts = location_input.split(',')
+    if len(location_parts) != 2:
+        raise ValueError("La ubicación debe tener el formato 'fila, columna'")
+    try:
+        row = int(location_parts[0])
+        col = int(location_parts[1])
+    except ValueError:
+        raise ValueError("La fila y columna deben ser números enteros")
+    return word_input, (row, col), orientation_input  
