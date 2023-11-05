@@ -71,8 +71,8 @@ class ScrabbleGame:
     def play(self, word, location, orientation):
         try:
             self.validate_word(word, location, orientation)
-            played_word = self.board.put_words(word, location, orientation)
-            total = self.calculate_words_value(played_word)
+            word = self.board.put_words(word, location, orientation)
+            total = self.calculate_words_value(word)
             self.players[self.turn].score += total
             self.next_turn()
         except InvalidWordException as e:

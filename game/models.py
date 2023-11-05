@@ -64,10 +64,10 @@ class Board:
         x, y = location
         word_length = len(word)
         if orientation == "H": 
-            if x < 0 or x >= 15 or y < 0 or (y + word_length > 15 and not self.is_empty):
+            if x < 0 or x >= 14 or y < 0 or (y + word_length > 14 and not self.is_empty):
                 return False
         elif orientation == "V": 
-            if x < 0 or (x + word_length > 15 and not self.is_empty) or y < 0 or y >= 15:
+            if x < 0 or (x + word_length > 14 and not self.is_empty) or y < 0 or y >= 14:
                 return False
         else:
             return False
@@ -78,7 +78,7 @@ class Board:
         for row in self.grid:
             for cell in row:
                 if cell.value != "":
-                    return False 
+                    return False
         return True
     
     def validate_word_place_board(self, word, location, orientation):
@@ -89,11 +89,11 @@ class Board:
 
         if orientation == "H":
             for i in range(word_len):
-                if x < 0 or x >= 15 or y + i < 0 or y + i >= 15 or self.grid[x][y + i].value != "":
+                if x < 0 or x >= 14 or y + i < 0 or y + i >= 14 or self.grid[x][y + i].value != "":
                     return False
         if orientation == "V":
             for i in range(word_len):
-                if x + i < 0 or x + i >= 15 or y < 0 or y >= 15 or self.grid[x + i][y].value != "":
+                if x + i < 0 or x + i >= 14 or y < 0 or y >= 14 or self.grid[x + i][y].value != "":
                     return False
         return True
 
