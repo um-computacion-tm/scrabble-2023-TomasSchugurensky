@@ -9,6 +9,9 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(len(board.grid), 15)
         self.assertEqual(len(board.grid[0]), 15)
     
+    def setUp(self) -> None:
+        self.board = Board()
+    
     def test_validate(self):  
         board = Board()
         word = 'Facultad'
@@ -98,7 +101,3 @@ class TestBoard(unittest.TestCase):
     def test_cell_repr(self):
         board = Board()
         special_cells = [(4, 1), (7, 7), (14, 14)]
-        
-
-if __name__ == '__main__':
-    unittest.main()

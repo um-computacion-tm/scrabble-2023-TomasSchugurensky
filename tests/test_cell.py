@@ -16,9 +16,16 @@ class TestCell(unittest.TestCase):
 
     def test_add_letter(self):
         cell = Cell()
-        cell.add_letter('A')
-        self.assertEqual(cell.letter, 'A')
-        self.assertEqual(cell.value, 'A')
+        letter = Tile("A", 1)
+        cell.add_letter(letter)
+        self.assertEqual(cell.letter, letter)
+        self.assertEqual(cell.value, letter)
+
+    def test_add_letter_with_string(self):
+        cell = Cell()
+        cell.add_letter("B")
+        self.assertEqual(cell.letter, "B")
+        self.assertEqual(cell.value, "B")
 
     def test_add_no_letter(self):
         cell = Cell()
@@ -43,14 +50,23 @@ class TestCell(unittest.TestCase):
         cell.add_letter('B')
         self.assertEqual(repr(cell), repr('B'))
 
-    def test_repr_multiplier(self):
+    def test_repr_letters(self):
+        cell = Cell()
+        tile = Tile("A", 1)
+        cell.add_letter(tile)
+        self.assertEqual(repr(cell), repr(tile))
+
+    def test_repr_word_multiplier(self):
         cell = Cell(multiplier=2, multiplier_type="word")
         self.assertEqual(repr(cell), 'Wx2')
+
+    def test_repr_letter_multiplier(self):
         cell = Cell(multiplier=3, multiplier_type="letter")
         self.assertEqual(repr(cell), 'Lx3')
-        cell = Cell(multiplier=1, multiplier_type="letter")
+
+    def test_repr_without_letter_or_multiplier(self):
+        cell = Cell()
         self.assertEqual(repr(cell), '   ')
-    
 
 if __name__ == '__main__':
     unittest.main()

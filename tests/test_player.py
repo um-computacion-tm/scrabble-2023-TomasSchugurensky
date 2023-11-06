@@ -60,7 +60,7 @@ class TestPlayer(unittest.TestCase):
             Tile(letter='T', values=1),
         ]
 
-        tiles_to_exchange = ['L', 'A']
+        tiles_to_exchange = ['B', 'E']
         initial_bag_count = len(bag_tiles_obj.tiles)
         exchange_successful = player.exchange(tiles_to_exchange, bag_tiles_obj)
 

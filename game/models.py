@@ -7,7 +7,7 @@ class InvalidPlaceWordException(Exception):
 class Board:
     def __init__(self):
         self.grid = [
-            [ Cell(1, '') for _ in range(15) ]
+            [Cell(1, Cell(), '') for _ in range(15)]
             for _ in range(15)
         ]
         self.is_cell_occupied = [[False] * 15 for _ in range(15)]
