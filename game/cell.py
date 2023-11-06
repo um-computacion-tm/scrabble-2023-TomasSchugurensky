@@ -19,10 +19,14 @@ class Cell:
             self.letter = None
             self.value = ""
 
-    def calculate_word_value(self, word_multiplier=1):
-        if self.letter is None:
-            return 0
-        return self.letter.calculate_word_value(self.multiplier) * word_multiplier
+    def calculate_word_value(self):
+        if self.letter:
+            tile_value = self.letter.values
+        if self.multiplier_type == "word":
+            return tile_value * self.multiplier
+        elif self.multiplier_type == "letter":
+            return tile_value * self.multiplier
+        return 0
 
     def __repr__(self):
         if self.letter:

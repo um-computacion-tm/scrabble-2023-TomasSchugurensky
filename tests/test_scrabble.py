@@ -67,16 +67,18 @@ class TestScrabble(unittest.TestCase):
         word = "CASA"
         location = (7, 7)
         orientation = "H"
-        required_letters = [Tile(letter, valor) for letter, valor in [("C", 3), ("A", 1), ("S", 1), ("A", 1)]]
 
+        required_letters = [Tile(letter, value) for letter, value in [("C", 3), ("A", 1), ("S", 1), ("A", 1)]]
         has_required_letters = self.scrabble_game.current_player.has_letters(required_letters)
         if not has_required_letters:
-            self.fail("No tenes las letras")
+            self.fail("No tenes las letras requeridas")
+
         initial_score = self.scrabble_game.current_player.score
         self.scrabble_game.play(word, location, orientation)
+        expected_score = 3 + 1 + 1 + 1
         final_score = self.scrabble_game.current_player.score
-        self.assertEqual(final_score, initial_score + self.scrabble_game.calculate_words_value(word))
-        #No anda, preguntar el miercoles
+    
+        self.assertEqual(final_score, initial_score + expected_score)
 
 if __name__ == '__main__':
     unittest.main()
