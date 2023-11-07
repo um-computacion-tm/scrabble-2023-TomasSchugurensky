@@ -27,15 +27,26 @@ class Player:
                 return False
         return True
     
+    def exchange_tile(self, bag_tiles, tile):
+        self.tiles.remove(tile)
+        bag_tiles.put([tile])
+        new_tiles = bag_tiles.take(1)
+        self.tiles.extend(new_tiles)
+    
     def exchange(self, tiles_to_exchange, bag_tiles):
-        if not all(tile_letter in [tile.letter for tile in self.tiles] for tile_letter in tiles_to_exchange):
+        if not all(tile in self.tiles for tile in tiles_to_exchange):
             return False  
-        
-        self.tiles = [tile for tile in self.tiles if tile.letter not in tiles_to_exchange]
-        bag_tiles.put([Tile(letter, 0) for letter in tiles_to_exchange])  
-        bag_tiles.shuffle()
+
+        for tile in tiles_to_exchange:
+            self.tiles.remove(tile)
+
+        bag_tiles.put(tiles_to_exchange)
         new_tiles = bag_tiles.take(len(tiles_to_exchange))
         self.tiles.extend(new_tiles)
+
+        if len(self.tiles) != 7:
+            additional_tiles_needed = 7 - len(self.tiles)
+            self.tiles.extend(bag_tiles.take(additional_tiles_needed))
 
         return True
 

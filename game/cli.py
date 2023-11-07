@@ -1,8 +1,28 @@
 class UserInterface:
 
-    def show_player(self):
-        print(f"Nombre del jugador: {self.name}")
-        print("Fichas del jugador:", ", ".join([tile.letter for tile in self.tiles]))
+    @staticmethod
+    def exchange_tile(player, bag_tiles):
+        print("Current tiles:", ", ".join([f"{tile.letter}" for tile in player.tiles]))
+        while True:
+            try:
+                index_exchange = int(input(f"Enter index of tile to change (0-{len(player.tiles) - 1}): "))
+                if 0 <= index_exchange < len(player.tiles):
+                    break
+                else:
+                    print(f"Please enter a valid index between 0 and {len(player.tiles) - 1}.")
+            except ValueError:
+                print("Please enter a number.")
+
+        
+        tile_to_exchange = player.tiles[index_exchange]
+        player.exchange_tile(bag_tiles, tile_to_exchange)
+        print("Tile exchanged successfully.")
+
+    
+    @staticmethod
+    def show_player(player):
+        print(f"Nombre del jugador: {player.name}")
+        print("Fichas del jugador:", ", ".join([tile.letter for tile in player.tiles]))
 
     def get_player_count():
         while True:
