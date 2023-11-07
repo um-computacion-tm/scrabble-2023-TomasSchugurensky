@@ -17,18 +17,15 @@ def main():
         UserInterface.show_board(game.get_board())
         UserInterface.show_player(current_player)
         
-        accion = input("Ingresa una palabra ('P'), intercambiar fichas ('I'), saltar turno ('S'), terminar juego ('E') : ").upper()
+        accion = input("Ingresa una palabra ('P'), intercambiar fichas ('I'), saltar turno ('S'), terminar juego ('E') : ").strip().upper()
 
         if accion == 'E':
-            print("Juego terminado por el jugador.")
+            print("Juego terminado por el jugador")
             break
 
         if accion == 'P':
-            word, coords, orientation = UserInterface.get_inputs()  
-            try:
-                game.play(word, coords, orientation)
-            except Exception as e:
-                print(e)
+            word, location, orientation = UserInterface.get_inputs()
+            game.play(word, location, orientation)
 
         if accion == 'I':
             UserInterface.exchange_tile(current_player, bag_tiles)
