@@ -71,10 +71,15 @@ class ScrabbleGame:
     def play(self, word, location, orientation):
         try:
             self.validate_word(word, location, orientation)
-            word = self.board.put_words(word, location, orientation)
-            total = self.calculate_words_value(word)
-            self.players[self.turn].score += total
+
+            if self.board.put_words(word, location, orientation):
+                total = self.calculate_words_value(word)
+                self.players[self.turn].score += total
+            else:
+                print("The word couldn't be placed on the board.")
+                return 
             self.next_turn()
+
         except InvalidWordException as e:
             print(f"Error: {e}")
         except InvalidPlaceWordException as e:
