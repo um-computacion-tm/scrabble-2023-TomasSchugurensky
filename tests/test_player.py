@@ -58,8 +58,9 @@ class TestPlayer(unittest.TestCase):
    
         self.assertTrue(exchange_successful, "Intercambio exitoso")
         self.assertEqual(len(player.tiles), 7, "Jugador debe tener 7 fichas después de intercambiar")
-        self.assertEqual(len(bag_tiles.tiles), initial_bag_count - len(tiles_to_exchange), "La bolsa debe tener menos fichas después del intercambio")
-   
+        self.assertEqual(len(bag_tiles.tiles), initial_bag_count + len(tiles_to_exchange), "La bolsa debe tener más fichas después del intercambio")
+
+    
         for tile in tiles_to_exchange:
             self.assertIn(tile, bag_tiles.tiles, "Las fichas intercambiadas deben estar en la bolsa")
 

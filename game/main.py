@@ -5,16 +5,22 @@ from game.cli import UserInterface
 
 def main():
     bag_tiles = BagTile()
-    current_player_index = 0
-    player_count = UserInterface.get_player_count()  
+    player_count = UserInterface.get_player_count()
     players = [Player(bag_tiles, f"Jugador {i + 1}") for i in range(player_count)]
     game = ScrabbleGame(player_count)
+    
+    current_player_index = 0  
 
     while game.is_playing():
         current_player = players[current_player_index]
-        UserInterface.show_board(game.get_board())  
-        UserInterface.show_player(current_player)    
-        accion = input("Ingresa una palabra ('P'), intercambiar fichas ('I'), saltar turno ('S') : ").upper()
+        UserInterface.show_board(game.get_board())
+        UserInterface.show_player(current_player)
+
+        accion = input("Ingresa una palabra ('P'), intercambiar fichas ('I'), saltar turno ('S'), terminar juego ('E') : ").upper()
+
+        if accion == 'E':
+            print("Juego terminado por el jugador.")
+            break
 
         if accion == 'P':
             word, coords, orientation = UserInterface.get_inputs()  
