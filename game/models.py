@@ -12,14 +12,14 @@ class Board:
         self.set_multiplier('TL', [(6, 2), (10, 2), (2, 6), (6, 6), (10, 6), (14, 6), (1, 8), (5, 8), (9, 8), (13, 8), (2, 10), (6, 10), (10, 10), (14, 10), (6, 14), (10, 14)])
         self.set_multiplier('DW', [(1, 1), (8, 1), (15, 1), (2, 2), (14, 2), (3, 3), (13, 3), (4, 4), (12, 4), (7, 7), (11, 7), (4, 12), (12, 12), (1, 15), (8, 15), (15, 15)])
         self.set_multiplier('TW', [(0, 0), (7, 0), (14, 0), (0, 7), (14, 7), (0, 14), (7, 14), (14, 14)])
-    
+
     def set_multiplier(self, multiplier_type, coordinates):
         for x, y in coordinates:
             x, y = x - 1, y - 1
             if 0 <= x < 15 and 0 <= y < 15:
                 self.grid[x][y].multiplier = self.multiplier_value(multiplier_type)
                 self.grid[x][y].multiplier_type = multiplier_type
-
+    
     def multiplier_value(self, multiplier_type):
         return {
             'DL': 2,
@@ -27,7 +27,7 @@ class Board:
             'DW': 2,  
             'TW': 3,  
         }.get(multiplier_type, 1)
-
+    
     @staticmethod
     def calculate_word_value(word: list[Cell]) -> int:
         value: int = 0
@@ -104,12 +104,3 @@ class Board:
                 if x + i < 0 or x + i >= 14 or y < 0 or y >= 14 or self.grid[x + i][y].value != "":
                     return False
         return True
-
-def show_board(self):
-    print('\n  |' + ''.join([f' {str(row_index).rjust(2)} ' for row_index in range(15)]))
-    for row_index, row in enumerate(self.grid):
-        print(
-            str(row_index).rjust(2) +
-            '| ' +
-            ' '.join([cell.value if cell.value else "   " for cell in row])
-        )

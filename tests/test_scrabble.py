@@ -46,12 +46,9 @@ class TestScrabble(unittest.TestCase):
         self.scrabble_game.next_turn()
         self.assertEqual(self.scrabble_game.current_player, self.scrabble_game.players[0])
 
-    def test_calculate_word_valid(self):
-        game = ScrabbleGame(2)
-        word = "CASA"
-        calculated_score = game.calculate_words_value(word)
-        expected_score = 6
-        self.assertEqual(calculated_score, expected_score)
+    def test_calculate_words_value(self):
+        game = ScrabbleGame(1)  
+        self.assertEqual(game.calculate_words_value('CASA'), 6, "El valor calculado para 'CASA' deberia ser 6")
 
     def test_calculate_word_invalid(self):
         word = 'XD'
@@ -65,17 +62,20 @@ class TestScrabble(unittest.TestCase):
         self.assertEqual(calculated_value, valor)
 
     @patch('game.dictionary.dict_validate_word', return_value=True)
-    def test_play_valid(self, mock_dict_validate_word): 
-        player = self.scrabble_game.current_player
-        for letter, value in [("C", 3), ("A", 1), ("S", 1), ("A", 1)]:
-            player.tiles.append(Tile(letter, value))
+    def test_play_valid(self, mock_dict_validate_word):
+        game = ScrabbleGame(1)
+        initial_score = game.get_current_player().score
 
-        initial_score = player.score
-        self.scrabble_game.play("CASA", (7, 7), "H")
-        final_score = player.score
-        expected_score_increase = 6  
+        game.get_current_player().tiles = [Tile('C', 3), Tile('A', 1), Tile('S', 1), Tile('A', 1)]
 
-    
+        location = (7, 7)  
+        orientation = 'H'  
+
+        game.play('CASA', location, orientation)
+
+        expected_score_increase = game.calculate_words_value('CASA')
+        final_score = game.get_current_player().score
+
         self.assertEqual(final_score, initial_score + expected_score_increase, "Score did not increase correctly after playing 'CASA'")
 
 if __name__ == '__main__':

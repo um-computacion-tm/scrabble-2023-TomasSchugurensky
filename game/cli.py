@@ -52,10 +52,22 @@ class UserInterface:
     
     @staticmethod
     def show_board(board):
-        print('\n  |' + ''.join([f' {str(row_index).rjust(2)} ' for row_index in range(15)]))
+        print('\n  |' + ''.join([f' {str(col_index).rjust(2)} ' for col_index in range(15)]))
         for row_index, row in enumerate(board.grid):
-            print(
-                str(row_index).rjust(2) +
-                '| ' +
-                ' '.join([cell.value if cell.value else "   " for cell in row])
-            )
+            row_display = str(row_index).rjust(2) + '| '
+            for cell in row:
+                if cell.value:  
+                    row_display += f' {cell.value} '
+                elif cell.multiplier_type:  
+                    multiplier = cell.multiplier_type
+                    if multiplier == 'DL':
+                        row_display += ' DL'
+                    elif multiplier == 'TL':
+                        row_display += ' TL'
+                    elif multiplier == 'DW':
+                        row_display += ' DW'
+                    elif multiplier == 'TW':
+                        row_display += ' TW'
+                else:
+                    row_display += '   '  
+            print(row_display)
