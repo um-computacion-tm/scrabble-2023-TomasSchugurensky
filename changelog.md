@@ -36,3 +36,4 @@
 #05/11/2023: Fix CLI and change main according to CLI
 #07/11/2023: Improve general cover
              Fix exchange method
+             Add a method to remove tiles you used

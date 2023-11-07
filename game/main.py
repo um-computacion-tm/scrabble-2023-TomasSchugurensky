@@ -7,7 +7,7 @@ def main():
     bag_tiles = BagTile()
     player_count = UserInterface.get_player_count()
     players = [Player(bag_tiles, f"Jugador {i + 1}") for i in range(player_count)]
-    print("About to instantiate ScrabbleGame") 
+    print("Iniciando") 
     game = ScrabbleGame(player_count)
     
     current_player_index = 0  
@@ -16,7 +16,6 @@ def main():
         current_player = players[current_player_index]
         UserInterface.show_board(game.get_board())
         UserInterface.show_player(current_player)
-        UserInterface.show_score(current_player)
         
         accion = input("Ingresa una palabra ('P'), intercambiar fichas ('I'), saltar turno ('S'), terminar juego ('E') : ").strip().upper()
 
@@ -33,6 +32,8 @@ def main():
         
         if accion == 'S':
             game.skip_turn()
+
+        UserInterface.show_player(current_player)
 
         current_player_index = (current_player_index + 1) % player_count
 

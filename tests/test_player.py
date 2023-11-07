@@ -39,7 +39,7 @@ class TestPlayer(unittest.TestCase):
             Tile(letter='A', values=1),
         ]
         is_valid = player.has_letters(tiles)
-        self.assertTrue(is_valid)
+        self.assertFalse(is_valid)
 
     def test_exchange(self):
         bag_tiles = BagTile()

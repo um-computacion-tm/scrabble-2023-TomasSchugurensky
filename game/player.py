@@ -19,13 +19,14 @@ class Player:
             return len(additional_tiles)
         else:
             return 0
+    
+
+    def remove_tiles(self, tiles_to_remove):
+        self.tiles = [tile for tile in self.tiles if tile not in tiles_to_remove]
         
-    def has_letters(self, tiles):
+    def has_letters(self, required_letters):
         player_tiles = [tile.letter for tile in self.tiles]
-        for tile in tiles:
-            if tile in player_tiles:
-                return False
-        return True
+        return all(letter in player_tiles for letter in required_letters)
     
     def exchange_tile(self, bag_tiles, tile):
         self.tiles.remove(tile)
