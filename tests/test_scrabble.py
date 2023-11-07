@@ -1,5 +1,6 @@
 import unittest
 from game.scrabblegame import ScrabbleGame, InvalidWordException
+from unittest.mock import patch
 from game.tile import Tile
 
 class TestScrabble(unittest.TestCase):
@@ -63,22 +64,19 @@ class TestScrabble(unittest.TestCase):
         calculated_value = self.scrabble_game.calculate_words_value(word)
         self.assertEqual(calculated_value, valor)
 
-    def test_play_valid(self):
-        word = "CASA"
-        location = (7, 7)
-        orientation = "H"
+    @patch('game.dictionary.dict_validate_word', return_value=True)
+    def test_play_valid(self, mock_dict_validate_word): 
+        player = self.scrabble_game.current_player
+        for letter, value in [("C", 3), ("A", 1), ("S", 1), ("A", 1)]:
+            player.tiles.append(Tile(letter, value))
 
-        required_letters = [Tile(letter, value) for letter, value in [("C", 3), ("A", 1), ("S", 1), ("A", 1)]]
-        has_required_letters = self.scrabble_game.current_player.has_letters(required_letters)
-        if not has_required_letters:
-            self.fail("No tenes las letras requeridas")
+        initial_score = player.score
+        self.scrabble_game.play("CASA", (7, 7), "H")
+        final_score = player.score
+        expected_score_increase = 6  
 
-        initial_score = self.scrabble_game.current_player.score
-        self.scrabble_game.play(word, location, orientation)
-        expected_score = 3 + 1 + 1 + 1
-        final_score = self.scrabble_game.current_player.score
     
-        self.assertEqual(final_score, initial_score + expected_score)
+        self.assertEqual(final_score, initial_score + expected_score_increase, "Score did not increase correctly after playing 'CASA'")
 
 if __name__ == '__main__':
     unittest.main()

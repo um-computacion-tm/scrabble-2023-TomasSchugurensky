@@ -34,3 +34,4 @@
 #30/10/2023: Fix error in coveragerc
 #31/10/2023: Fix the methods in main
 #05/11/2023: Fix CLI and change main according to CLI
+#07/11/2023: Improve general cover

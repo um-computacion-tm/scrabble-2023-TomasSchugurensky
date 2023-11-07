@@ -28,27 +28,15 @@ class Player:
         return True
     
     def exchange(self, tiles_to_exchange, bag_tiles):
-        tiles_to_exchange_copy = list(tiles_to_exchange)
-        player_tiles_copy = list(self.tiles)
-        tiles_to_remove = []
-
-        for tile in tiles_to_exchange_copy:
-            if tile in player_tiles_copy:
-                tiles_to_remove.append(tile)
-            else:
-                return False 
-
-        if len(tiles_to_remove) == len(tiles_to_exchange):
-            for tile in tiles_to_remove:
-                tiles_to_exchange_copy.remove(tile)
-                player_tiles_copy.remove(tile)
-            
-            bag_tiles.put(tiles_to_exchange)
-            num_new_tiles = 7 - len(self.tiles)
-            new_tiles = bag_tiles.take(num_new_tiles)
+        if all(tile in [player_tile.letter for player_tile in self.tiles] for tile in tiles_to_exchange):
+            self.tiles = [tile for tile in self.tiles if tile.letter not in tiles_to_exchange]
+            bag_tiles.put(tiles_to_exchange)  
+            new_tiles = bag_tiles.take(7 - len(self.tiles))
             self.tiles.extend(new_tiles)
 
             return True
+        else:
+            return False
 
     def show_player(self):
         print(f"Nombre del jugador: {self.name}")
