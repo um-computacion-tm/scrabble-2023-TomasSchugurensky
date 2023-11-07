@@ -57,7 +57,7 @@ class ScrabbleGame:
     def calculate_words_value(self, word):
         try:
             if not dict_validate_word(word):
-                raise InvalidWordException("Palabra no existe en el diccionario")
+                return 0
         except DictionaryConnectionError:
             pass
 
@@ -79,13 +79,24 @@ class ScrabbleGame:
 
 
     def play(self, word, location, orientation):
+        if not dict_validate_word(word):
+            print(f"La palabra '{word}' no existe en el diccionario")
+            return
+
         tiles = self.string_to_tiles(word)
+        print(f"Fichas para palabra '{word}': {[tile.letter for tile in tiles]}")
+    
         if self.board.put_words(tiles, location, orientation):
             cells = self.board.get_cells(location, orientation, len(word))
             score_for_word = self.board.calculate_word_value(cells)
             self.players[self.current_player_index].score += score_for_word
+        
+            self.players[self.current_player_index].remove_tiles(tiles)
+
+            print(f"Palabra '{word}' puesta correctamente. Puntaje para esta palabra: {score_for_word}")
+            print(f"Puntaje total para {self.players[self.current_player_index].name}: {self.players[self.current_player_index].score}")
         else:
-            print("The word couldn't be placed on the board.")
+            print("La palabra no pudo ser colocada en el tablero.")
 
     def validate_word(self, word, location, orientation):
         required_letters = list(word)

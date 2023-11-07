@@ -42,9 +42,9 @@ class Board:
         cells = []
         x, y = location
         for i in range(length):
-            if orientation == "H":
+            if orientation == 'H':
                 cells.append(self.grid[x][y + i])
-            elif orientation == "V":
+            else:  
                 cells.append(self.grid[x + i][y])
         return cells
     

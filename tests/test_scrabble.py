@@ -51,9 +51,9 @@ class TestScrabble(unittest.TestCase):
         self.assertEqual(game.calculate_words_value('CASA'), 6, "El valor calculado para 'CASA' deberia ser 6")
 
     def test_calculate_word_invalid(self):
-        word = 'XD'
-        with self.assertRaises(InvalidWordException):
-            self.scrabble_game.calculate_words_value(word)
+        word = 'XD'  
+        calculated_value = self.scrabble_game.calculate_words_value(word)
+        self.assertEqual(calculated_value, 0, "Palabras invalidas no tienen puntuacion")
   
     def test_calculate_no_word(self):
         word = ""
