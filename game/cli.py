@@ -51,6 +51,10 @@ class UserInterface:
         return word_input, (row, col), orientation_input
     
     @staticmethod
+    def show_score(player):
+        print(f"Puntuación de {player.name}: {player.score}")
+    
+    @staticmethod
     def show_board(board):
         print('\n  |' + ''.join([f' {str(col_index).rjust(2)} ' for col_index in range(15)]))
         for row_index, row in enumerate(board.grid):
