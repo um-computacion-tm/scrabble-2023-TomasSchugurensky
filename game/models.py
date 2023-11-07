@@ -6,19 +6,27 @@ class InvalidPlaceWordException(Exception):
 
 class Board:
     def __init__(self):
-        self.grid = [
-            [Cell(1, Cell(), '') for _ in range(15)]
-            for _ in range(15)
-        ]
+        self.grid = [[Cell() for _ in range(15)] for _ in range(15)]
         self.is_cell_occupied = [[False] * 15 for _ in range(15)]
         self.set_multiplier('DL', [(4, 1), (12, 1), (1, 4), (8, 4), (15, 4), (3, 7), (7, 7), (9, 7), (13, 7), (4, 10), (12, 10), (0, 12), (7, 12), (14, 12), (3, 15), (11, 15)])
         self.set_multiplier('TL', [(6, 2), (10, 2), (2, 6), (6, 6), (10, 6), (14, 6), (1, 8), (5, 8), (9, 8), (13, 8), (2, 10), (6, 10), (10, 10), (14, 10), (6, 14), (10, 14)])
         self.set_multiplier('DW', [(1, 1), (8, 1), (15, 1), (2, 2), (14, 2), (3, 3), (13, 3), (4, 4), (12, 4), (7, 7), (11, 7), (4, 12), (12, 12), (1, 15), (8, 15), (15, 15)])
         self.set_multiplier('TW', [(0, 0), (7, 0), (14, 0), (0, 7), (14, 7), (0, 14), (7, 14), (14, 14)])
     
-    def set_multiplier(self, multiplier, coordinates):
+    def set_multiplier(self, multiplier_type, coordinates):
         for x, y in coordinates:
-            self.grid[x - 1][y - 1] = multiplier
+            x, y = x - 1, y - 1
+            if 0 <= x < 15 and 0 <= y < 15:
+                self.grid[x][y].multiplier = self.multiplier_value(multiplier_type)
+                self.grid[x][y].multiplier_type = multiplier_type
+
+    def multiplier_value(self, multiplier_type):
+        return {
+            'DL': 2,
+            'TL': 3,
+            'DW': 2,  
+            'TW': 3,  
+        }.get(multiplier_type, 1)
 
     @staticmethod
     def calculate_word_value(word: list[Cell]) -> int:

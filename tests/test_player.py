@@ -50,25 +50,18 @@ class TestPlayer(unittest.TestCase):
             Tile(letter='L', values=1),
             Tile(letter='A', values=1),
         ]
-    
-    
-        bag_tiles_obj = BagTile()
-        bag_tiles_obj.tiles = [
-            Tile(letter='B', values=3),
-            Tile(letter='E', values=1),
-            Tile(letter='S', values=1),
-            Tile(letter='T', values=1),
-        ]
 
-        tiles_to_exchange = ['B', 'E']
-        initial_bag_count = len(bag_tiles_obj.tiles)
-        exchange_successful = player.exchange(tiles_to_exchange, bag_tiles_obj)
+        tiles_to_exchange = [Tile(letter='H', values=4), Tile(letter='O', values=1)]
+        initial_bag_count = len(bag_tiles.tiles)
+        exchange_successful = player.exchange(tiles_to_exchange, bag_tiles)
 
+   
         self.assertTrue(exchange_successful, "Intercambio exitoso")
         self.assertEqual(len(player.tiles), 7, "Jugador debe tener 7 fichas después de intercambiar")
-        self.assertEqual(len(bag_tiles_obj.tiles), initial_bag_count - len(tiles_to_exchange), "La bolsa debe tener menos fichas después del intercambio")
+        self.assertEqual(len(bag_tiles.tiles), initial_bag_count - len(tiles_to_exchange), "La bolsa debe tener menos fichas después del intercambio")
+   
         for tile in tiles_to_exchange:
-            self.assertIn(tile, bag_tiles_obj.tiles, "Las fichas intercambiadas deben estar en la bolsa")
+            self.assertIn(tile, bag_tiles.tiles, "Las fichas intercambiadas deben estar en la bolsa")
 
     def test_exchange_invalid(self):
         bag_tiles = BagTile()

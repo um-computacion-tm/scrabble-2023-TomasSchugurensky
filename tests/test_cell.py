@@ -19,26 +19,26 @@ class TestCell(unittest.TestCase):
         letter = Tile("A", 1)
         cell.add_letter(letter)
         self.assertEqual(cell.letter, letter)
-        self.assertEqual(cell.value, letter)
+        self.assertEqual(cell.value, letter.letter)
 
     def test_add_letter_with_string(self):
-        cell = Cell()
+        cell = Cell(letter_values=letter_values)
         cell.add_letter("B")
-        self.assertEqual(cell.letter, "B")
-        self.assertEqual(cell.value, "B")
+        expected_tile = Tile("B", letter_values['B'])
+        self.assertEqual(cell.letter.letter, expected_tile.letter)
+        self.assertEqual(cell.value, expected_tile.letter)
 
     def test_add_no_letter(self):
         cell = Cell()
-        cell.add_letter('')
-        self.assertIsNone(cell.letter)
-        self.assertEqual(cell.value, '')
+        with self.assertRaises(ValueError):
+            cell.add_letter('')
     
     def test_add_tile(self):
         cell = Cell()
         tile = Tile('B', 5)
         cell.add_letter(tile)
         self.assertEqual(cell.letter, tile)
-        self.assertEqual(cell.value, tile)
+        self.assertEqual(cell.value, tile.letter)
     
     def test_cell_value(self):
         cell = Cell(multiplier=3, multiplier_type="word")
@@ -47,8 +47,9 @@ class TestCell(unittest.TestCase):
 
     def test_repr(self):
         cell = Cell()
-        cell.add_letter('B')
-        self.assertEqual(repr(cell), repr('B'))
+        tile = Tile('B', letter_values['B'])
+        cell.add_letter(tile)
+        self.assertEqual(repr(cell), repr(tile))
 
     def test_repr_letters(self):
         cell = Cell()
