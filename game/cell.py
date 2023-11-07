@@ -19,15 +19,28 @@ class Cell:
         else:
             raise ValueError("Invalid input for add_letter")
 
-    def calculate_word_value(self):
-        if self.letter:
-            tile_value = self.letter.values
-            if self.multiplier_type == "word":
-                return tile_value * self.multiplier
-            elif self.multiplier_type == "letter":
-                return tile_value * self.multiplier
-            return tile_value
-        return 0
+    def calculate_word_value(self, cells):
+        word_multiplier = 1
+        word_value = 0
+        for cell in cells:
+            if cell.multiplier_type == 'letter':
+                word_value += cell.letter.value * cell.multiplier
+            else:
+                word_value += cell.letter.value
+            if cell.multiplier_type == 'word':
+                word_multiplier *= cell.multiplier
+        return word_value * word_multiplier
+    
+    def get_word_cells(self, word, location, orientation):
+        x, y = location
+        cells = []
+        if orientation.upper() == 'H':  
+            for i in range(len(word)):
+                cells.append(self.grid[x][y + i])
+        elif orientation.upper() == 'V':  
+            for i in range(len(word)):
+                cells.append(self.grid[x + i][y])
+        return cells
 
     def __repr__(self):
         if self.letter:

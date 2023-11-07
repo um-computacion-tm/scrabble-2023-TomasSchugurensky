@@ -16,6 +16,7 @@ def main():
         current_player = players[current_player_index]
         UserInterface.show_board(game.get_board())
         UserInterface.show_player(current_player)
+        UserInterface.show_score(current_player)
         
         accion = input("Ingresa una palabra ('P'), intercambiar fichas ('I'), saltar turno ('S'), terminar juego ('E') : ").strip().upper()
 

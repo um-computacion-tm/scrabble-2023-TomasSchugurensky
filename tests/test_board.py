@@ -12,29 +12,37 @@ class TestBoard(unittest.TestCase):
     def setUp(self) -> None:
         self.board = Board()
     
-    def test_validate(self):  
+    def test_validate(self):
         board = Board()
-        word = 'Facultad'
-        location = (5, 10)
-        orientation = "H"  
-        word_is_valid = board.validate_word_inside_board(word, location, orientation)
-        self.assertTrue(word_is_valid)
-
-    def test_word_inside_board(self):
-        board = Board()
-        word = "Facultad"
-        location = (5, 4)
+        word = "TEST"
+        location = (0, 0)
         orientation = "H"
         word_is_valid = board.validate_word_inside_board(word, location, orientation)
+        self.assertTrue(word_is_valid, "La palabra debería ser válida y ajustarse dentro del tablero.")
+
+    def test_word_inside_board(self):
+        word = "casa"
+        location = (5, 4)
+        orientation = "H"
+        word_is_valid = self.board.validate_word_inside_board(word, location, orientation)
         self.assertTrue(word_is_valid)
+
+    def test_place_word_on_board(self):
+        board = Board()  
+        word = "TEST"
+        tiles = board.string_to_tiles(word)  
+        location = (7, 7)
+        orientation = "H"
+        is_placed = board.put_words(tiles, location, orientation)
+        self.assertTrue(is_placed, "The word should be placed on the board.")
 
     def test_word_out_of_board(self):
         board = Board()
-        word = "Facultad"
-        location = (14, 4)
+        word = "TEST"
+        location = (0, 15)  
         orientation = "H"
         word_is_valid = board.validate_word_inside_board(word, location, orientation)
-        self.assertFalse(word_is_valid)
+        self.assertFalse(word_is_valid, "La palabra debería ser inválida y no ajustarse dentro del tablero.")
 
     def test_board_is_empty(self):
         board = Board()
@@ -42,11 +50,12 @@ class TestBoard(unittest.TestCase):
 
     def test_place_word_empty_board_horizontal_fine(self):
         board = Board()
-        word = "Facultad"
+        word = "Casa"
+        tiles = board.string_to_tiles(word)  
         location = (7, 4)
         orientation = "H"
-        word_is_valid = board.validate_word_place_board(word, location, orientation)
-        self.assertTrue(word_is_valid)
+        word_is_valid = board.put_words(tiles, location, orientation)
+        self.assertTrue(word_is_valid, "Word should have been placed on the board.")
 
     def test_place_word_empty_board_horizontal_wrong(self):
         board = Board()
