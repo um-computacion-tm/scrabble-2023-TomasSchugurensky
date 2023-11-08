@@ -2,21 +2,20 @@ class UserInterface:
 
     @staticmethod
     def exchange_tile(player, bag_tiles):
-        print("Current tiles:", ", ".join([f"{tile.letter}" for tile in player.tiles]))
+        print("Fichas:", ", ".join([f"{tile.letter}" for tile in player.tiles]))
         while True:
             try:
-                index_exchange = int(input(f"Enter index of tile to change (0-{len(player.tiles) - 1}): "))
+                index_exchange = int(input(f"Introduce el indice a cambiar (0-{len(player.tiles) - 1}): "))
                 if 0 <= index_exchange < len(player.tiles):
                     break
                 else:
-                    print(f"Please enter a valid index between 0 and {len(player.tiles) - 1}.")
+                    print(f"Ingresar un indice valido entre 0 y {len(player.tiles) - 1}.")
             except ValueError:
-                print("Please enter a number.")
+                print("Porfavor ingrese un numero")
 
-        
         tile_to_exchange = player.tiles[index_exchange]
         player.exchange_tile(bag_tiles, tile_to_exchange)
-        print("Tile exchanged successfully.")
+        print("Ficha intercambiada con exito")
 
     
     @staticmethod
@@ -38,9 +37,9 @@ class UserInterface:
     
     @staticmethod
     def get_inputs():
-        word_input = input("Ingrese palabra: ").strip().upper()  
+        word_input = input("Ingrese palabra: ").strip().upper()
         location_input = input("Ingrese la ubicación (fila, columna): ").strip()
-        orientation_input = input("Ingrese la orientación (horizontal 'H' o vertical 'V'): ").strip().upper()  
+        orientation_input = input("Ingrese la orientación (horizontal 'H' o vertical 'V'): ").strip().upper()
         location_parts = location_input.split(',')
         if len(location_parts) != 2:
             raise ValueError("La ubicación debe tener el formato 'fila, columna'")
@@ -49,10 +48,6 @@ class UserInterface:
             col = int(location_parts[1]) - 1
         except ValueError:
             raise ValueError("La fila y columna deben ser números enteros")
-    
-        if orientation_input not in ('H', 'V'):
-            raise ValueError("La orientación debe ser 'H' para horizontal o 'V' para vertical")
-    
         return word_input, (row, col), orientation_input
     
     @staticmethod

@@ -60,6 +60,18 @@ class Board:
                     word_multiplier *= cell.multiplier
         return word_value * word_multiplier
     
+    def check_cell_left(self, x, y):
+        return y > 0 and self.grid[x][y-1].value != ""
+
+    def check_cell_right(self, x, y):
+        return y < 14 and self.grid[x][y+1].value != ""
+
+    def check_cell_up(self, x, y):
+        return x > 0 and self.grid[x-1][y].value != ""
+
+    def check_cell_down(self, x, y):
+        return x < 14 and self.grid[x+1][y].value != ""
+    
     def put_words(self, tiles, location, orientation):
         word = ''.join(tile.letter for tile in tiles)
         if not self.validate_word(word, location, orientation):
@@ -81,7 +93,7 @@ class Board:
                 self.is_cell_occupied[x + i][y] = True
 
         return True
-    
+
     def validate_word(self, word, location, orientation):
         if not dict_validate_word(word):
             raise InvalidWordException("Su palabra no existe en el diccionario")
@@ -94,15 +106,11 @@ class Board:
     def validate_word_inside_board(self, word, location, orientation):
         x, y = location
         word_length = len(word)
-        print(f"Validating word '{word}' at location ({x}, {y}) with orientation '{orientation}'")
         if orientation == "H":
-            result = x >= 0 and y >= 0 and x < 15 and (y + word_length) <= 15
+            return x >= 0 and y >= 0 and x < 15 and (y + word_length) <= 15
         elif orientation == "V":
-            result = y >= 0 and x >= 0 and y < 15 and (x + word_length) <= 15
-        else:
-            result = False
-        print(f"Result of validation is: {result}")
-        return result
+            return y >= 0 and x >= 0 and (x + word_length) <= 15 and y < 15
+        return False
     
     @property
     def is_empty(self):
@@ -115,14 +123,12 @@ class Board:
     def validate_word_place_board(self, word, location, orientation):
         x, y = location
         word_len = len(word)
-   
         if orientation == "H":
             if y + word_len > 15: 
                 return False
             for i in range(word_len):
                 if self.grid[x][y + i].value:  
                     return False
-    
         elif orientation == "V":
             if x + word_len > 15:  
                 return False
