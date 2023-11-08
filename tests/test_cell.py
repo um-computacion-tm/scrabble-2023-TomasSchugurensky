@@ -40,6 +40,11 @@ class TestCell(unittest.TestCase):
         cell.add_letter(tile)
         self.assertEqual(cell.letter, tile)
         self.assertEqual(cell.value, tile.letter)
+
+    def test_add_invalid_type(self):
+        cell = Cell(letter_values=letter_values)
+        with self.assertRaises(ValueError):
+            cell.add_letter(5)
     
     def test_cell_value(self):
         board = Board()  
@@ -52,7 +57,29 @@ class TestCell(unittest.TestCase):
         expected_value = 3 * Tile('Z', 10).values
         self.assertEqual(calculated_value, expected_value)
 
-    
+    def test_value_calculation_with_multipliers(self):
+        cell1 = Cell(multiplier=2, multiplier_type='letter', letter=Tile('A', 1))
+        cell2 = Cell(multiplier=3, multiplier_type='word', letter=Tile('B', 3))
+        word_value = cell1.calculate_word_value([cell1, cell2])
+        self.assertEqual(word_value, (1 * 2 + 3) * 3)
+
+    def test_get_cells_horizontal(self):
+        board = Board()
+        word = "word"
+        starting_location = (0, 0)  
+        orientation = 'H'
+        cells = board.get_cells(starting_location, orientation, len(word))
+        self.assertEqual(len(cells), len(word))
+        for cell in cells:
+            self.assertIsInstance(cell, Cell)
+
+    def test_get_cells_vertical(self):
+        board = Board()
+        word_length = 4  
+        starting_location = (0, 0)  
+        orientation = 'V'
+        cells = board.get_cells(starting_location, orientation, word_length)
+        self.assertEqual(len(cells), word_length)
 
     def test_repr(self):
         cell = Cell()

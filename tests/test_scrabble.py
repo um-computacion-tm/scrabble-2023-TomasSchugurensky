@@ -1,5 +1,5 @@
 import unittest
-from game.scrabblegame import ScrabbleGame, InvalidWordException
+from game.scrabblegame import ScrabbleGame
 from unittest.mock import patch
 from game.tile import Tile
 
@@ -76,7 +76,22 @@ class TestScrabble(unittest.TestCase):
         expected_score_increase = game.calculate_words_value('CASA')
         final_score = game.get_current_player().score
 
-        self.assertEqual(final_score, initial_score + expected_score_increase, "Score did not increase correctly after playing 'CASA'")
+        self.assertEqual(final_score, initial_score + expected_score_increase, "Puntaje no aumento correctamente con la palabra 'CASA'")
 
+    def test_play_invalid_word(self):
+        game = ScrabbleGame(1)
+        initial_score = game.get_current_player().score
+
+        game.get_current_player().tiles = [Tile('X', 8), Tile('D', 2)]
+
+        location = (7, 7)
+        orientation = 'H'
+
+        game.play('XD', location, orientation)
+
+        final_score = game.get_current_player().score
+
+        self.assertEqual(final_score, initial_score, "Score should not increase for playing an invalid word")
+    
 if __name__ == '__main__':
     unittest.main()

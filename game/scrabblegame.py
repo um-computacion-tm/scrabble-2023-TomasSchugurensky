@@ -88,7 +88,7 @@ class ScrabbleGame:
 
         tiles = self.string_to_tiles(word)
         print(f"Fichas para la palabra '{word}': {[tile.letter for tile in tiles]}")
-    
+
         if self.board.put_words(tiles, location, orientation):
             cells = self.board.get_cells(location, orientation, len(word))
             score_for_word = self.board.calculate_word_value(cells)
@@ -100,7 +100,7 @@ class ScrabbleGame:
             print(f"Puntaje total para {self.players[self.current_player_index].name}: {self.players[self.current_player_index].score}")
         else:
             print("La palabra no pudo ser colocada en el tablero.")
-        
+    
         UserInterface.show_player(self.players[self.current_player_index])
 
     def validate_word(self, word, location, orientation):
