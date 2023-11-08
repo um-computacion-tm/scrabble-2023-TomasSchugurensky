@@ -34,7 +34,7 @@ class TestBoard(unittest.TestCase):
         location = (7, 7)
         orientation = "H"
         is_placed = board.put_words(tiles, location, orientation)
-        self.assertTrue(is_placed, "The word should be placed on the board.")
+        self.assertTrue(is_placed, "La palabra debe ser puesta")
 
     def test_word_out_of_board(self):
         board = Board()
@@ -55,7 +55,7 @@ class TestBoard(unittest.TestCase):
         location = (7, 4)
         orientation = "H"
         word_is_valid = board.put_words(tiles, location, orientation)
-        self.assertTrue(word_is_valid, "Word should have been placed on the board.")
+        self.assertTrue(word_is_valid, "Palabra debió haberse puesto")
 
     def test_place_word_empty_board_horizontal_wrong(self):
         board = Board()
@@ -105,8 +105,18 @@ class TestBoard(unittest.TestCase):
         board.grid[8][7] = cell2
         board.grid[9][7] = cell3
         board.grid[10][7] = cell4
-        
-        
-    def test_cell_repr(self):
+
+    def test_calculate_word_value(self):
         board = Board()
-        special_cells = [(4, 1), (7, 7), (14, 14)]
+        word = "TEST"
+        tiles = board.string_to_tiles(word)
+        location = (7, 7)
+        orientation = "H"
+        board.put_words(tiles, location, orientation)
+    
+        cells = board.get_cells(location, orientation, len(word))
+        calculated_value = board.calculate_word_value(cells)
+    
+        expected_value = sum(tile.values for tile in tiles)
+        self.assertEqual(calculated_value, expected_value, "El calculo es igual al valor de las letras")
+    

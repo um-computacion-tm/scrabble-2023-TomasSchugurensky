@@ -1,5 +1,6 @@
 import unittest
 from game.cli import UserInterface  
+from game.bagtile import BagTile
 from unittest.mock import patch
 
 class TestCLI(unittest.TestCase):
@@ -26,6 +27,6 @@ class TestCLI(unittest.TestCase):
             UserInterface.get_player_count(),
             1,
         )
-        
+
 if __name__ == '__main__':
     unittest.main()

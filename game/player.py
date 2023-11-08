@@ -38,7 +38,7 @@ class Player:
     
     def exchange_tile(self, bag_tiles, tile):
         self.tiles.remove(tile)
-        bag_tiles.put([tile])
+        bag_tiles.put(tile)  
         new_tiles = bag_tiles.take(1)
         self.tiles.extend(new_tiles)
     

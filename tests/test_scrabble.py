@@ -1,5 +1,5 @@
 import unittest
-from game.scrabblegame import ScrabbleGame
+from game.scrabblegame import ScrabbleGame, InvalidPlaceWordException
 from unittest.mock import patch
 from game.tile import Tile
 
@@ -46,6 +46,12 @@ class TestScrabble(unittest.TestCase):
         self.scrabble_game.next_turn()
         self.assertEqual(self.scrabble_game.current_player, self.scrabble_game.players[0])
 
+    def test_skip_turn(self):
+        initial_turns_skipped = self.scrabble_game.skipped_turns
+        self.scrabble_game.skip_turn()
+        final_turns_skipped = self.scrabble_game.skipped_turns
+        self.assertEqual(final_turns_skipped, initial_turns_skipped + 1, "Turnos salteados aumenta en 1")
+
     def test_calculate_words_value(self):
         game = ScrabbleGame(1)  
         self.assertEqual(game.calculate_words_value('CASA'), 6, "El valor calculado para 'CASA' deberia ser 6")
@@ -91,7 +97,35 @@ class TestScrabble(unittest.TestCase):
 
         final_score = game.get_current_player().score
 
-        self.assertEqual(final_score, initial_score, "Score should not increase for playing an invalid word")
+        self.assertEqual(final_score, initial_score, "Puntaje no aumenta con palabra invalida")
+
+    def test_validate_word_exceeds_board(self):
+        word = 'CASA'
+        location = (14, 7)  
+        orientation = 'H'
+
+        with patch('game.dictionary.dict_validate_word', return_value=True):
+            with self.assertRaises(InvalidPlaceWordException):
+                self.scrabble_game.validate_word(word, location, orientation)
+
+    def test_validate_word_bad_placed(self):
+        word = 'CASA'
+        location = (7, 7)
+        orientation = 'V'  
+
+        with patch('game.dictionary.dict_validate_word', return_value=True):
+            with self.assertRaises(InvalidPlaceWordException):
+                self.scrabble_game.validate_word(word, location, orientation)
+
+    def test_validate_not_enough_letters(self):
+        word = 'CASA'
+        location = (7, 7)
+        orientation = 'H'
+        self.scrabble_game.current_player.tiles = [Tile('X', 8), Tile('D', 2)]
+
+        with patch('game.dictionary.dict_validate_word', return_value=True):
+            with self.assertRaises(InvalidPlaceWordException):
+                self.scrabble_game.validate_word(word, location, orientation)
     
 if __name__ == '__main__':
     unittest.main()
