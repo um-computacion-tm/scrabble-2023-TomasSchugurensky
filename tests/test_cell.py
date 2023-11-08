@@ -52,6 +52,8 @@ class TestCell(unittest.TestCase):
         expected_value = 3 * Tile('Z', 10).values
         self.assertEqual(calculated_value, expected_value)
 
+    
+
     def test_repr(self):
         cell = Cell()
         tile = Tile('B', letter_values['B'])

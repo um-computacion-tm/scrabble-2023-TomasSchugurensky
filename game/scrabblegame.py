@@ -2,6 +2,7 @@ from game.player import Player
 from game.bagtile import BagTile
 from game.models import Board, InvalidPlaceWordException
 from game.tile import Tile
+from game.cli import UserInterface
 from game.dictionary import dict_validate_word, DictionaryConnectionError
 
 class InvalidWordException(Exception):
@@ -81,29 +82,26 @@ class ScrabbleGame:
 
 
     def play(self, word, location, orientation):
-        try:
-            if not dict_validate_word(word):
-                print(f"La palabra '{word}' no existe en el diccionario")
-                return False  
+        if not dict_validate_word(word):
+            print(f"La palabra '{word}' no existe en el diccionario")
+            return
 
-            tiles = self.string_to_tiles(word)
-            print(f"Fichas para palabra '{word}': {[tile.letter for tile in tiles]}")
+        tiles = self.string_to_tiles(word)
+        print(f"Fichas para la palabra '{word}': {[tile.letter for tile in tiles]}")
+    
+        if self.board.put_words(tiles, location, orientation):
+            cells = self.board.get_cells(location, orientation, len(word))
+            score_for_word = self.board.calculate_word_value(cells)
+            self.players[self.current_player_index].score += score_for_word
+            self.players[self.current_player_index].remove_tiles(tiles)
+            self.players[self.current_player_index].refill_tiles(self.bag_tile) 
 
-            if self.board.put_words(tiles, location, orientation):
-                cells = self.board.get_cells(location, orientation, len(word))
-                score_for_word = self.board.calculate_word_value(cells)
-                self.players[self.current_player_index].score += score_for_word
-                self.players[self.current_player_index].remove_tiles(tiles)
-                self.players[self.current_player_index].refill_tiles(self.bag_tile)
-                print(f"Palabra '{word}' puesta correctamente. Puntaje para esta palabra: {score_for_word}")
-                print(f"Puntaje total para {self.players[self.current_player_index].name}: {self.players[self.current_player_index].score}")
-                return True  
-            else:
-                print("La palabra no pudo ser colocada en el tablero.")
-                return False  
-        except InvalidPlaceWordException as e:
-            print(e)  
-            return False
+            print(f"Palabra '{word}' puesta correctamente. Puntaje para esta palabra: {score_for_word}")
+            print(f"Puntaje total para {self.players[self.current_player_index].name}: {self.players[self.current_player_index].score}")
+        else:
+            print("La palabra no pudo ser colocada en el tablero.")
+        
+        UserInterface.show_player(self.players[self.current_player_index])
 
     def validate_word(self, word, location, orientation):
         required_letters = list(word)

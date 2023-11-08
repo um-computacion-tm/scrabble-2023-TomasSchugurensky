@@ -69,7 +69,6 @@ class BagTile:
 
             Tile('RR',8),
 
-            Tile('',0),
 
             ]
         
