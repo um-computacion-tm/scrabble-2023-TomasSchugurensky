@@ -38,17 +38,21 @@ class UserInterface:
     
     @staticmethod
     def get_inputs():
-        word_input = input("Ingrese palabra: ").strip()
+        word_input = input("Ingrese palabra: ").strip().upper()  
         location_input = input("Ingrese la ubicación (fila, columna): ").strip()
-        orientation_input = input("Ingrese la orientación (horizontal o vertical): ").strip()
+        orientation_input = input("Ingrese la orientación (horizontal 'H' o vertical 'V'): ").strip().upper()  
         location_parts = location_input.split(',')
         if len(location_parts) != 2:
             raise ValueError("La ubicación debe tener el formato 'fila, columna'")
         try:
-            row = int(location_parts[0])
-            col = int(location_parts[1])
+            row = int(location_parts[0]) - 1
+            col = int(location_parts[1]) - 1
         except ValueError:
             raise ValueError("La fila y columna deben ser números enteros")
+    
+        if orientation_input not in ('H', 'V'):
+            raise ValueError("La orientación debe ser 'H' para horizontal o 'V' para vertical")
+    
         return word_input, (row, col), orientation_input
     
     @staticmethod

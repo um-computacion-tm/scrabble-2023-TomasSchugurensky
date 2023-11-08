@@ -23,6 +23,14 @@ class Player:
 
     def remove_tiles(self, tiles_to_remove):
         self.tiles = [tile for tile in self.tiles if tile not in tiles_to_remove]
+
+    def refill_tiles(self, bag_tiles):
+        while len(self.tiles) < 7:
+            new_tiles = bag_tiles.take(1)  
+            if new_tiles:  
+                self.tiles.extend(new_tiles)  
+            else:
+                break
         
     def has_letters(self, required_letters):
         player_tiles = [tile.letter for tile in self.tiles]
