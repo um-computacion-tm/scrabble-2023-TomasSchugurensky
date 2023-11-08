@@ -94,11 +94,15 @@ class Board:
     def validate_word_inside_board(self, word, location, orientation):
         x, y = location
         word_length = len(word)
+        print(f"Validating word '{word}' at location ({x}, {y}) with orientation '{orientation}'")
         if orientation == "H":
-            return x >= 0 and y >= 0 and x < 15 and (y + word_length) <= 15
+            result = x >= 0 and y >= 0 and x < 15 and (y + word_length) <= 15
         elif orientation == "V":
-            return y >= 0 and x >= 0 and y < 15 and (x + word_length) <= 15
-        return False
+            result = y >= 0 and x >= 0 and y < 15 and (x + word_length) <= 15
+        else:
+            result = False
+        print(f"Result of validation is: {result}")
+        return result
     
     @property
     def is_empty(self):
