@@ -24,24 +24,13 @@ class Cell:
         word_value = 0
         for cell in cells:
             if cell.multiplier_type == 'letter':
-                word_value += cell.letter.value * cell.multiplier
+                word_value += cell.letter.values * cell.multiplier  
             else:
-                word_value += cell.letter.value
+                word_value += cell.letter.values  
             if cell.multiplier_type == 'word':
                 word_multiplier *= cell.multiplier
         return word_value * word_multiplier
     
-    def get_word_cells(self, word, location, orientation):
-        x, y = location
-        cells = []
-        if orientation.upper() == 'H':  
-            for i in range(len(word)):
-                cells.append(self.grid[x][y + i])
-        elif orientation.upper() == 'V':  
-            for i in range(len(word)):
-                cells.append(self.grid[x + i][y])
-        return cells
-
     def __repr__(self):
         if self.letter:
             return repr(self.letter)

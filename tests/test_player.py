@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import io
 from game.player import Player
 from game.bagtile import BagTile
 from game.tile import Tile
@@ -15,10 +16,14 @@ class TestPlayer(unittest.TestCase):
     def test_rellenar(self):
         bag_tiles = BagTile()
         player = Player(bag_tiles, "Nombre")
-        self.assertEqual(len(player.tiles), 7)  
-        additional_tiles = player.rellenar(bag_tiles)  
-        self.assertEqual(additional_tiles, 0)  
-        self.assertEqual(len(player.tiles), 7 + additional_tiles)
+        self.assertTrue(len(bag_tiles.tiles) >= 7, "BagTile debe tener las suficientes fichas")
+
+        player.tiles = player.tiles[:3]  
+        self.assertEqual(len(player.tiles), 3, "Jugador empieza con 3 fichas")
+
+        additional_tiles = player.rellenar(bag_tiles)
+        self.assertEqual(additional_tiles, 4, "Deberia añadirse 4 fichas")
+        self.assertEqual(len(player.tiles), 7, "Jugador debe tener 7 fichas")
 
     def test_validate_has_letters(self):
         bag_tile = BagTile()
@@ -40,7 +45,7 @@ class TestPlayer(unittest.TestCase):
         ]
         is_valid = player.has_letters(tiles)
         self.assertFalse(is_valid)
-
+    
     def test_exchange(self):
         bag_tiles = BagTile()
         player = Player(bag_tiles, "Nombre")
@@ -83,6 +88,23 @@ class TestPlayer(unittest.TestCase):
         self.assertFalse(exchange_unsuccessful, "Intercambio no debe ser exitoso")
         self.assertEqual(len(player.tiles), 4, "Jugador no deberia perder fichas")
         self.assertEqual(len(bag_tiles.tiles), initial_bag_count, "La bolsa no debería cambiar si el intercambio es inválido")
+
+    
+
+    def test_has_letters_true(self):
+        bag_tiles = BagTile()
+        player = Player(bag_tiles, "Nombre")
+        required_letters = [tile.letter for tile in player.tiles[:4]] 
+        self.assertTrue(player.has_letters(required_letters))
+
+    def test_show_player_output(self):
+        bag_tiles = BagTile()
+        player = Player(bag_tiles, "Nombre")
+        with unittest.mock.patch('sys.stdout', new=io.StringIO()) as fake_stdout:
+            player.show_player()
+            self.assertIn(player.name, fake_stdout.getvalue())
+            for tile in player.tiles:
+                self.assertIn(tile.letter, fake_stdout.getvalue())
 
 if __name__ == '__main__':
     unittest.main()
