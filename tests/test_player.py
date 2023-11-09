@@ -89,8 +89,6 @@ class TestPlayer(unittest.TestCase):
         self.assertEqual(len(player.tiles), 4, "Jugador no deberia perder fichas")
         self.assertEqual(len(bag_tiles.tiles), initial_bag_count, "La bolsa no debería cambiar si el intercambio es inválido")
 
-    
-
     def test_has_letters_true(self):
         bag_tiles = BagTile()
         player = Player(bag_tiles, "Nombre")
