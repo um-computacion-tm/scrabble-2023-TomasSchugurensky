@@ -83,6 +83,5 @@ class BagTile:
                 break  
         return tiles_taken
 
-    def put(self,tiles):
-        for tile in tiles:
-            self.tiles.append(tile)
+    def put(self,tile):
+        self.tiles.append(tile)
